@@ -10,6 +10,8 @@ const CONFIG_PATH = path.join(ROOT, 'blog', 'config.json');
 const USED_PATH = path.join(ROOT, 'blog', 'used-topics.json');
 const POSTS_DIR = path.join(ROOT, 'blog', 'posts');
 const INDEX_PATH = path.join(ROOT, 'blog', 'index.html');
+const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
+const ROBOTS_PATH = path.join(ROOT, 'robots.txt');
 
 function readJSON(p, fallback) {
   try { return JSON.parse(fs.readFileSync(p, 'utf8')); }
@@ -145,6 +147,29 @@ ${items || '<p style="color:' + t.inkSoft + ';font-size:13px;">아직 글이 없
   fs.writeFileSync(INDEX_PATH, html, 'utf8');
 }
 
+function updateSitemap(config, posts) {
+  if (!config.siteUrl) {
+    console.warn('config.json에 siteUrl이 없어서 sitemap.xml을 건너뜁니다.');
+    return;
+  }
+  const base = config.siteUrl.replace(/\/$/, '');
+  const urls = [
+    `${base}/`,
+    `${base}/blog/index.html`,
+    ...posts.map(p => `${base}/blog/posts/${p.slug}.html`)
+  ];
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.map(u => `  <url><loc>${u}</loc></url>`).join('\n')}
+</urlset>
+`;
+  fs.writeFileSync(SITEMAP_PATH, xml, 'utf8');
+
+  if (!fs.existsSync(ROBOTS_PATH)) {
+    fs.writeFileSync(ROBOTS_PATH, `User-agent: *\nAllow: /\nSitemap: ${base}/sitemap.xml\n`, 'utf8');
+  }
+}
+
 async function main() {
   const config = readJSON(CONFIG_PATH, null);
   if (!config) {
@@ -175,6 +200,7 @@ async function main() {
   fs.writeFileSync(USED_PATH, JSON.stringify(used, null, 2), 'utf8');
 
   updateBlogIndex(config, used.posts);
+  updateSitemap(config, used.posts);
 
   console.log('발행 완료:', post.title);
 }
