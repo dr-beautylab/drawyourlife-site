@@ -76,7 +76,7 @@ def generate_post(config, topic):
     res.raise_for_status()
     text = "".join(block.get("text", "") for block in res.json()["content"])
     cleaned = text.replace("```json", "").replace("```", "").strip()
-    return json.loads(cleaned)
+    return json.loads(cleaned, strict=False)
 
 
 def pick_topic(config, used):
