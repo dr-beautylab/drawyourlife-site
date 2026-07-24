@@ -1,0 +1,41 @@
+name: Naver Blog Auto Publish
+
+on:
+  schedule:
+    - cron: '0 1 * * 1'   # 매주 월요일 UTC 01:00 = 한국시간 오전 10시
+  workflow_dispatch:        # "지금 바로 실행" 버튼으로도 수동 실행 가능
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Naver post script
+        env:
+          NAVER_ID: ${{ secrets.NAVER_ID }}
+          NAVER_PW: ${{ secrets.NAVER_PW }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/naver_post.py
+
+      - name: Commit updated topic tracker
+        run: |
+          git config user.name "auto-blog-bot"
+          git config user.email "auto-blog-bot@users.noreply.github.com"
+          git add blog/naver-used-topics.json
+          git diff --cached --quiet && echo "변경 없음" && exit 0
+          git commit -m "네이버 블로그 자동 발행 $(date +'%Y-%m-%d')"
+          git push
