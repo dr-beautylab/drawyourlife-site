@@ -89,11 +89,12 @@ def pick_topic(config, used):
 
 def login_naver(driver, wait):
     driver.get("https://nid.naver.com/nidlogin.login")
-    # 네이버 로그인 페이지는 자동입력 방지를 위해 execute_script로 값 주입
     id_input = wait.until(EC.presence_of_element_located((By.ID, "id")))
     pw_input = driver.find_element(By.ID, "pw")
-    driver.execute_script("arguments[0].value = arguments[1];", id_input, NAVER_ID)
-    driver.execute_script("arguments[0].value = arguments[1];", pw_input, NAVER_PW)
+    id_input.click()
+    id_input.send_keys(NAVER_ID)
+    pw_input.click()
+    pw_input.send_keys(NAVER_PW)
     driver.find_element(By.ID, "log.login").click()
     time.sleep(3)
 
@@ -151,11 +152,17 @@ def main():
     print("생성된 제목:", post["title"])
 
     options = Options()
-    options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--window-size=1280,900")
+    options.add_argument("--disable-blink-features=AutomationControlled")
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36")
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option("useAutomationExtension", False)
     driver = webdriver.Chrome(options=options)
+    driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
+        "source": "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
+    })
     wait = WebDriverWait(driver, 15)
 
     try:
@@ -164,6 +171,12 @@ def main():
         used["usedTopics"].append(topic)
         write_json(USED_PATH, used)
         print("발행 완료")
+    except Exception as e:
+        driver.save_screenshot("failure.png")
+        with open("failure.html", "w", encoding="utf-8") as f:
+            f.write(driver.page_source)
+        print("실패 시점 화면을 failure.png / failure.html 로 저장했습니다.")
+        raise
     finally:
         driver.quit()
 
