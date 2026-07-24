@@ -21,6 +21,9 @@ jobs:
       - name: Install Chrome
         uses: browser-actions/setup-chrome@v1
 
+      - name: Install Xvfb (virtual display)
+        run: sudo apt-get update && sudo apt-get install -y xvfb
+
       - name: Install dependencies
         run: pip install -r requirements.txt
 
@@ -29,7 +32,17 @@ jobs:
           NAVER_ID: ${{ secrets.NAVER_ID }}
           NAVER_PW: ${{ secrets.NAVER_PW }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python scripts/naver_post.py
+        run: xvfb-run --auto-servernum python scripts/naver_post.py
+
+      - name: Upload debug screenshot on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: naver-failure-debug
+          path: |
+            failure.png
+            failure.html
+          if-no-files-found: ignore
 
       - name: Commit updated topic tracker
         run: |
