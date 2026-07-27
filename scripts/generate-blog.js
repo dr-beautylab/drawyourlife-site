@@ -156,7 +156,9 @@ function updateSitemap(config, posts) {
   const urls = [
     `${base}/`,
     `${base}/blog/index.html`,
-    ...posts.map(p => `${base}/blog/posts/${p.slug}.html`)
+    // 사이트맵 규격상 URL 은 퍼센트 인코딩해야 합니다.
+    // 한글을 그대로 두면 네이버 서치어드바이저가 사이트맵을 거부합니다.
+    ...posts.map(p => `${base}/blog/posts/${encodeURIComponent(p.slug)}.html`)
   ];
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
