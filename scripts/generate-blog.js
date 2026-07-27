@@ -77,28 +77,91 @@ ${config.businessInfo}
   return JSON.parse(cleaned);
 }
 
-function buildPostHTML(config, post, dateStr) {
+// HTML 속성에 넣을 문자열을 안전하게 이스케이프합니다.
+// 생성된 제목/요약에 따옴표가 섞이면 메타 태그가 통째로 깨집니다.
+function esc(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;')
+                  .replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+// AI가 만든 제목이 이미 업체명으로 끝나면 뒤에 또 붙이지 않습니다.
+function pageTitle(config, title) {
+  return title.includes(config.siteName) ? title : `${title} | ${config.siteName}`;
+}
+
+// 본문의 '자주 묻는 질문' 섹션을 FAQPage 구조화 데이터로 바꿉니다.
+// AI 검색은 질문-답변 쌍을 통째로 인용하기 때문에, 본문에만 두면 절반만 쓰는 셈입니다.
+function extractFaq(bodyHtml) {
+  const i = bodyHtml.search(/<h2[^>]*>[^<]*자주\s*묻는\s*질문[^<]*<\/h2>/);
+  if (i < 0) return null;
+  const tail = bodyHtml.slice(i);
+  const qa = [];
+  const re = /<h3[^>]*>([\s\S]*?)<\/h3>\s*((?:<(?:p|ul|ol)[^>]*>[\s\S]*?<\/(?:p|ul|ol)>\s*)+)/g;
+  let m;
+  while ((m = re.exec(tail))) {
+    const q = m[1].replace(/<[^>]+>/g, '').trim();
+    const a = m[2].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    if (q && a) qa.push({ '@type': 'Question', name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a } });
+  }
+  if (!qa.length) return null;
+  return { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: qa };
+}
+
+function buildPostHTML(config, post, dateStr, others) {
   const t = config.theme;
+  const base = (config.siteUrl || '').replace(/\/$/, '');
+  const url = `${base}/blog/posts/${encodeURIComponent(post.slug)}.html`;
+  const img = `${base}/og.jpg`;
+  const title = pageTitle(config, post.title);
+  const faq = extractFaq(post.bodyHtml);
+
+  const article = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    headline: post.title.slice(0, 110),
+    description: post.metaDescription,
+    image: img,
+    inLanguage: 'ko-KR',
+    datePublished: dateStr,
+    dateModified: dateStr,
+    author: { '@type': 'Organization', name: config.siteName, url: base + '/' },
+    publisher: { '@type': 'Organization', name: config.siteName,
+                 logo: { '@type': 'ImageObject', url: img } }
+  };
+
+  // 다른 글로 이어지는 링크. 크롤러가 글을 타고 돌 수 있게 하고,
+  // 독자에게도 다음 읽을거리를 줍니다.
+  const related = (others || []).slice(0, 3).map(p =>
+    `<li><a href="${encodeURIComponent(p.slug)}.html">${esc(p.title)}</a></li>`).join('');
+
   return `<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${post.title} | ${config.siteName}</title>
-<meta name="description" content="${post.metaDescription}">
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(post.metaDescription)}">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="${url}">
 <meta property="og:type" content="article">
-<meta property="og:title" content="${post.title}">
-<meta property="og:description" content="${post.metaDescription}">
+<meta property="og:title" content="${esc(post.title)}">
+<meta property="og:description" content="${esc(post.metaDescription)}">
+<meta property="og:url" content="${url}">
+<meta property="og:image" content="${img}">
+<meta property="og:site_name" content="${esc(config.siteName)}">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(post.title)}">
+<meta name="twitter:description" content="${esc(post.metaDescription)}">
+<meta name="twitter:image" content="${img}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;600;700&family=Song+Myung&family=Gowun+Batang:wght@400;700&family=Gothic+A1:wght@400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": ${JSON.stringify(post.title)},
-  "description": ${JSON.stringify(post.metaDescription)},
-  "datePublished": "${dateStr}",
-  "publisher": { "@type": "LocalBusiness", "name": ${JSON.stringify(config.siteName)} }
-}
-</script>
+${JSON.stringify(article, null, 2)}
+</script>${faq ? `
+<script type="application/ld+json">
+${JSON.stringify(faq, null, 2)}
+</script>` : ''}
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:#ddd;display:flex;justify-content:center;font-family:${t.fBody};}
@@ -111,25 +174,53 @@ h3{font-size:16px;margin:20px 0 8px;}
 p{font-size:14.5px;line-height:1.8;margin-bottom:14px;color:${t.ink};}
 ul{margin:0 0 14px 20px;}
 li{font-size:14.5px;line-height:1.8;margin-bottom:6px;}
+.cta{margin:36px 0 0;padding:22px 20px;background:${t.acc};border-radius:14px;color:#fff;}
+.cta p{color:rgba(255,255,255,.85);font-size:13px;margin-bottom:14px;}
+.cta strong{display:block;font-size:16px;margin-bottom:8px;color:#fff;}
+.cta a{display:block;text-align:center;background:#fff;color:${t.accDark};font-weight:800;
+       padding:13px;border-radius:100px;font-size:14.5px;text-decoration:none;}
+.more{margin-top:30px;padding-top:18px;border-top:1px solid ${t.line};}
+.more b{font-size:13px;color:${t.inkSoft};display:block;margin-bottom:8px;}
+.more li{font-size:13.5px;margin-bottom:6px;}
+.more a{color:${t.acc};text-decoration:none;}
+.home{display:block;text-align:center;margin-top:24px;font-size:13px;color:${t.inkSoft};text-decoration:underline;}
 </style></head><body><div class="page">
 <a class="back" href="../index.html">← 블로그 목록으로</a>
-<h1>${post.title}</h1>
-<div class="date">${dateStr} · ${config.siteName}</div>
+<h1>${esc(post.title)}</h1>
+<div class="date">${dateStr} · ${esc(config.siteName)}</div>
 ${post.bodyHtml}
+<div class="cta">
+  <strong>${esc(config.siteName)}</strong>
+  <p>${esc(config.ctaText || '상담과 예약은 네이버 예약으로 받고 있습니다.')}</p>
+  <a href="${config.bookingUrl || '#'}" target="_blank" rel="noopener">네이버 예약하기</a>
+</div>${related ? `
+<div class="more"><b>함께 보면 좋은 글</b><ul>${related}</ul></div>` : ''}
+<a class="home" href="../../index.html">${esc(config.siteName)} 홈으로</a>
 </div></body></html>`;
 }
 
 function updateBlogIndex(config, posts) {
   const t = config.theme;
+  const base = (config.siteUrl || '').replace(/\/$/, '');
+  const desc = `${config.siteName}이(가) 직접 정리한 정보 글 모음입니다.`;
   const items = posts.map(p => `
-    <a href="posts/${p.slug}.html" style="display:block;padding:16px 0;border-bottom:1px solid ${t.line};text-decoration:none;color:${t.ink};">
-      <div style="font-size:15px;font-weight:700;margin-bottom:4px;">${p.title}</div>
+    <a href="posts/${encodeURIComponent(p.slug)}.html" style="display:block;padding:16px 0;border-bottom:1px solid ${t.line};text-decoration:none;color:${t.ink};">
+      <div style="font-size:15px;font-weight:700;margin-bottom:4px;">${esc(p.title)}</div>
       <div style="font-size:12px;color:${t.inkSoft};">${p.date}</div>
     </a>`).reverse().join('');
 
   const html = `<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>블로그 | ${config.siteName}</title>
+<title>블로그 | ${esc(config.siteName)}</title>
+<meta name="description" content="${esc(desc)}">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="${base}/blog/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="블로그 | ${esc(config.siteName)}">
+<meta property="og:description" content="${esc(desc)}">
+<meta property="og:url" content="${base}/blog/index.html">
+<meta property="og:image" content="${base}/og.jpg">
+<meta property="og:site_name" content="${esc(config.siteName)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;600;700&family=Song+Myung&family=Gowun+Batang:wght@400;700&family=Gothic+A1:wght@400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
@@ -141,7 +232,7 @@ body{background:#ddd;display:flex;justify-content:center;font-family:${t.fBody};
 h1{font-family:${t.fDisplay};font-size:22px;margin-bottom:20px;}
 </style></head><body><div class="page">
 <a class="back" href="../index.html">← 홈으로</a>
-<h1>${config.siteName} 블로그</h1>
+<h1>${esc(config.siteName)} 블로그</h1>
 ${items || '<p style="color:' + t.inkSoft + ';font-size:13px;">아직 글이 없어요.</p>'}
 </div></body></html>`;
   fs.writeFileSync(INDEX_PATH, html, 'utf8');
@@ -153,16 +244,21 @@ function updateSitemap(config, posts) {
     return;
   }
   const base = config.siteUrl.replace(/\/$/, '');
+  // 사이트맵 규격상 URL 은 퍼센트 인코딩해야 합니다.
+  // 한글을 그대로 두면 네이버 서치어드바이저가 사이트맵을 거부합니다.
+  // lastmod 를 넣으면 검색엔진이 새 글만 골라 다시 읽어갑니다.
+  const today = new Date().toISOString().slice(0, 10);
   const urls = [
-    `${base}/`,
-    `${base}/blog/index.html`,
-    // 사이트맵 규격상 URL 은 퍼센트 인코딩해야 합니다.
-    // 한글을 그대로 두면 네이버 서치어드바이저가 사이트맵을 거부합니다.
-    ...posts.map(p => `${base}/blog/posts/${encodeURIComponent(p.slug)}.html`)
+    { loc: `${base}/`, mod: today },
+    { loc: `${base}/blog/index.html`, mod: today },
+    ...posts.map(p => ({
+      loc: `${base}/blog/posts/${encodeURIComponent(p.slug)}.html`,
+      mod: p.date || today
+    }))
   ];
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map(u => `  <url><loc>${u}</loc></url>`).join('\n')}
+${urls.map(u => `  <url><loc>${u.loc}</loc><lastmod>${u.mod}</lastmod></url>`).join('\n')}
 </urlset>
 `;
   fs.writeFileSync(SITEMAP_PATH, xml, 'utf8');
@@ -194,7 +290,7 @@ async function main() {
   const dateStr = new Date().toISOString().slice(0, 10);
 
   if (!fs.existsSync(POSTS_DIR)) fs.mkdirSync(POSTS_DIR, { recursive: true });
-  const postHtml = buildPostHTML(config, post, dateStr);
+  const postHtml = buildPostHTML(config, post, dateStr, (used.posts||[]).slice(-3));
   fs.writeFileSync(path.join(POSTS_DIR, slug + '.html'), postHtml, 'utf8');
 
   used.usedTopics.push(topic);
