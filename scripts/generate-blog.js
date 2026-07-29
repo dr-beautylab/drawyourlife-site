@@ -290,6 +290,7 @@ async function main() {
   const dateStr = new Date().toISOString().slice(0, 10);
 
   if (!fs.existsSync(POSTS_DIR)) fs.mkdirSync(POSTS_DIR, { recursive: true });
+  post.slug = slug;   // canonical/og URL 을 만들려면 템플릿에서도 slug 가 필요합니다.
   const postHtml = buildPostHTML(config, post, dateStr, (used.posts||[]).slice(-3));
   fs.writeFileSync(path.join(POSTS_DIR, slug + '.html'), postHtml, 'utf8');
 
