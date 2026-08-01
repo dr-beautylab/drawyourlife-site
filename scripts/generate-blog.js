@@ -308,3 +308,44 @@ main().catch(err => {
   console.error(err);
   process.exit(1);
 });
+
+// --- 블로그 목록 페이지 구조화 데이터 -------------------------------
+// updateBlogIndex() 가 index.html 을 매번 새로 만들기 때문에, 모든 작업이 끝난 뒤
+// 마지막에 한 번 덧붙입니다. 실패해도 글 생성에는 영향을 주지 않습니다.
+function injectBlogSchema() {
+  const cfg = JSON.parse(fs.readFileSync(CONFIG_PATH, "utf8"));
+  const base = String(cfg.siteUrl || "").replace(/\/$/, "");
+  if (!base || !fs.existsSync(INDEX_PATH) || !fs.existsSync(SITEMAP_PATH)) return;
+  let html = fs.readFileSync(INDEX_PATH, "utf8");
+  if (html.indexOf("\"@type\": \"Blog\"") >= 0) return;
+  const sm = fs.readFileSync(SITEMAP_PATH, "utf8");
+  const urls = (sm.match(/<loc>[^<]+<\/loc>/g) || [])
+    .map(s => s.replace(/<\/?loc>/g, ""))
+    .filter(u => u.indexOf("/posts/") >= 0);
+  const items = [];
+  for (const u of urls) {
+    const file = path.join(POSTS_DIR, decodeURIComponent(u.split("/posts/")[1]));
+    if (!fs.existsSync(file)) continue;
+    const m = fs.readFileSync(file, "utf8").match(/"headline":\s*("(?:[^"\\]|\\.)*")/);
+    if (!m) continue;
+    items.push({ "@type": "BlogPosting", headline: JSON.parse(m[1]), url: u });
+  }
+  if (!items.length) return;
+  const ld = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: (cfg.siteName || "") + " 블로그",
+    url: base + "/blog/index.html",
+    inLanguage: "ko-KR",
+    publisher: { "@type": "Organization", name: cfg.siteName || "",
+                 url: base + "/", logo: { "@type": "ImageObject", url: base + "/og.jpg" } },
+    blogPost: items
+  };
+  html = html.replace("</head>",
+    '<script type="application/ld+json">\n' + JSON.stringify(ld, null, 2) + '\n</script>\n</head>');
+  fs.writeFileSync(INDEX_PATH, html);
+  console.log("blog index schema: " + items.length + "건");
+}
+process.on("exit", () => {
+  try { injectBlogSchema(); } catch (e) { console.error("blog schema skip:", e.message); }
+});
