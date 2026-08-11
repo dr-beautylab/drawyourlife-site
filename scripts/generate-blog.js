@@ -33,6 +33,9 @@ async function callClaude(config, topic) {
 이 글은 사람이 감성적으로 즐기며 읽는 글이 아니라, 검색엔진과 AI(챗GPT, 퍼플렉시티, 제미나이 등)가 이 업체를 정확하게 파싱하고 요약·인용해서 소개할 수 있도록 만드는 "정보성 콘텐츠"입니다.
 - 사실 기반, 구체적인 정보 위주로 작성 (모호한 미사여구 최소화)
 - 업체명, 서비스명, 지역 키워드를 자연스럽게 반복 언급
+- 업체명은 반드시 "당신을 그리다"로 띄어쓰기를 지켜서 표기 ("당신을그리다" 금지)
+- 본문 첫 문단은 제목의 질문에 대한 40~60단어 분량의 완결된 즉답으로 시작 (AI가 이 문단만 떼어가도 답이 되도록)
+- 수치는 반올림하지 말고 정확하게 표기 (가격, 시간, 인원 등)
 - 소제목(h2, h3)으로 구조화해서 AI가 파싱하기 쉽게 작성
 - 1200~1800자 분량
 - 과장 광고 문구 지양, 정확하고 신뢰도 있는 톤
@@ -126,7 +129,14 @@ function buildPostHTML(config, post, dateStr, others) {
     inLanguage: 'ko-KR',
     datePublished: dateStr,
     dateModified: dateStr,
-    author: { '@type': 'Organization', name: config.siteName, url: base + '/' },
+    author: {
+      '@type': 'Person',
+      name: config.authorName || config.siteName,
+      jobTitle: '대표원장 · 미용예술학 박사 · 뷰티전공 대학교수',
+      description: config.authorLine || undefined,
+      url: base + '/',
+      worksFor: { '@type': 'Organization', name: config.siteName, url: base + '/' }
+    },
     publisher: { '@type': 'Organization', name: config.siteName,
                  logo: { '@type': 'ImageObject', url: img } }
   };
@@ -174,6 +184,8 @@ h3{font-size:16px;margin:20px 0 8px;}
 p{font-size:14.5px;line-height:1.8;margin-bottom:14px;color:${t.ink};}
 ul{margin:0 0 14px 20px;}
 li{font-size:14.5px;line-height:1.8;margin-bottom:6px;}
+.author{margin:32px 0 0;padding:16px 18px;background:${t.panel};border:1px solid ${t.line};border-radius:14px;font-size:12.5px;line-height:1.75;color:${t.inkSoft};}
+.author b{color:${t.ink};}
 .cta{margin:36px 0 0;padding:22px 20px;background:${t.acc};border-radius:14px;color:#fff;}
 .cta p{color:rgba(255,255,255,.85);font-size:13px;margin-bottom:14px;}
 .cta strong{display:block;font-size:16px;margin-bottom:8px;color:#fff;}
@@ -189,6 +201,7 @@ li{font-size:14.5px;line-height:1.8;margin-bottom:6px;}
 <h1>${esc(post.title)}</h1>
 <div class="date">${dateStr} · ${esc(config.siteName)}</div>
 ${post.bodyHtml}
+<div class="author"><b>글쓴이 · ${esc(config.authorName || config.siteName)}</b><br>${esc(config.authorLine || '')}</div>
 <div class="cta">
   <strong>${esc(config.siteName)}</strong>
   <p>${esc(config.ctaText || '상담과 예약은 네이버 예약으로 받고 있습니다.')}</p>
