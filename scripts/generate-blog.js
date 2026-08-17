@@ -112,7 +112,13 @@ function extractFaq(bodyHtml) {
 }
 
 function buildPostHTML(config, post, dateStr, others) {
-  if (!post.slug) throw new Error('post.slug 가 없습니다. canonical/og URL 을 만들 수 없어 발행을 중단합니다.');
+  // slug 가 비면 canonical/og URL 이 .../undefined 로 찍힙니다.
+  // main() 이 항상 채워주지만, 혹시라도 비어 있으면 발행을 멈추는 대신
+  // 안전한 이름으로 채워 넣고 경고만 남깁니다.
+  if (!post.slug) {
+    post.slug = 'post-' + dateStr;
+    console.warn('post.slug 가 비어 있어 ' + post.slug + ' 로 대체했습니다.');
+  }
   const t = config.theme;
   const base = (config.siteUrl || '').replace(/\/$/, '');
   const url = `${base}/blog/posts/${encodeURIComponent(post.slug)}`;
@@ -305,11 +311,13 @@ async function main() {
 
   if (!fs.existsSync(POSTS_DIR)) fs.mkdirSync(POSTS_DIR, { recursive: true });
   post.slug = slug;   // canonical/og URL 을 만들려면 템플릿에서도 slug 가 필요합니다.
+  // 아래 파일명·목록 기록은 buildPostHTML 이 확정한 post.slug 를 그대로 씁니다.
+  // 같은 값을 쓰므로 canonical 주소와 실제 파일 이름이 어긋날 수 없습니다.
   const postHtml = buildPostHTML(config, post, dateStr, (used.posts||[]).slice(-3));
-  fs.writeFileSync(path.join(POSTS_DIR, slug + '.html'), postHtml, 'utf8');
+  fs.writeFileSync(path.join(POSTS_DIR, post.slug + '.html'), postHtml, 'utf8');
 
   used.usedTopics.push(topic);
-  used.posts.push({ slug, title: post.title, date: dateStr });
+  used.posts.push({ slug: post.slug, title: post.title, date: dateStr });
   fs.writeFileSync(USED_PATH, JSON.stringify(used, null, 2), 'utf8');
 
   updateBlogIndex(config, used.posts);
