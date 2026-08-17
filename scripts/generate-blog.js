@@ -112,9 +112,10 @@ function extractFaq(bodyHtml) {
 }
 
 function buildPostHTML(config, post, dateStr, others) {
+  if (!post.slug) throw new Error('post.slug 가 없습니다. canonical/og URL 을 만들 수 없어 발행을 중단합니다.');
   const t = config.theme;
   const base = (config.siteUrl || '').replace(/\/$/, '');
-  const url = `${base}/blog/posts/${encodeURIComponent(post.slug)}.html`;
+  const url = `${base}/blog/posts/${encodeURIComponent(post.slug)}`;
   const img = `${base}/og.jpg`;
   const title = pageTitle(config, post.title);
   const faq = extractFaq(post.bodyHtml);
@@ -144,7 +145,7 @@ function buildPostHTML(config, post, dateStr, others) {
   // 다른 글로 이어지는 링크. 크롤러가 글을 타고 돌 수 있게 하고,
   // 독자에게도 다음 읽을거리를 줍니다.
   const related = (others || []).slice(0, 3).map(p =>
-    `<li><a href="${encodeURIComponent(p.slug)}.html">${esc(p.title)}</a></li>`).join('');
+    `<li><a href="${encodeURIComponent(p.slug)}">${esc(p.title)}</a></li>`).join('');
 
   return `<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -197,7 +198,7 @@ li{font-size:14.5px;line-height:1.8;margin-bottom:6px;}
 .more a{color:${t.acc};text-decoration:none;}
 .home{display:block;text-align:center;margin-top:24px;font-size:13px;color:${t.inkSoft};text-decoration:underline;}
 </style></head><body><div class="page">
-<a class="back" href="../index.html">← 블로그 목록으로</a>
+<a class="back" href="../">← 블로그 목록으로</a>
 <h1>${esc(post.title)}</h1>
 <div class="date">${dateStr} · ${esc(config.siteName)}</div>
 ${post.bodyHtml}
@@ -208,7 +209,7 @@ ${post.bodyHtml}
   <a href="${config.bookingUrl || '#'}" target="_blank" rel="noopener">네이버 예약하기</a>
 </div>${related ? `
 <div class="more"><b>함께 보면 좋은 글</b><ul>${related}</ul></div>` : ''}
-<a class="home" href="../../index.html">${esc(config.siteName)} 홈으로</a>
+<a class="home" href="/">${esc(config.siteName)} 홈으로</a>
 </div></body></html>`;
 }
 
@@ -217,7 +218,7 @@ function updateBlogIndex(config, posts) {
   const base = (config.siteUrl || '').replace(/\/$/, '');
   const desc = `${config.siteName}이(가) 직접 정리한 정보 글 모음입니다.`;
   const items = posts.map(p => `
-    <a href="posts/${encodeURIComponent(p.slug)}.html" style="display:block;padding:16px 0;border-bottom:1px solid ${t.line};text-decoration:none;color:${t.ink};">
+    <a href="posts/${encodeURIComponent(p.slug)}" style="display:block;padding:16px 0;border-bottom:1px solid ${t.line};text-decoration:none;color:${t.ink};">
       <div style="font-size:15px;font-weight:700;margin-bottom:4px;">${esc(p.title)}</div>
       <div style="font-size:12px;color:${t.inkSoft};">${p.date}</div>
     </a>`).reverse().join('');
@@ -227,11 +228,11 @@ function updateBlogIndex(config, posts) {
 <title>블로그 | ${esc(config.siteName)}</title>
 <meta name="description" content="${esc(desc)}">
 <meta name="robots" content="index,follow,max-image-preview:large">
-<link rel="canonical" href="${base}/blog/index.html">
+<link rel="canonical" href="${base}/blog/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="블로그 | ${esc(config.siteName)}">
 <meta property="og:description" content="${esc(desc)}">
-<meta property="og:url" content="${base}/blog/index.html">
+<meta property="og:url" content="${base}/blog/">
 <meta property="og:image" content="${base}/og.jpg">
 <meta property="og:site_name" content="${esc(config.siteName)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -244,7 +245,7 @@ body{background:#ddd;display:flex;justify-content:center;font-family:${t.fBody};
 .back{display:inline-block;font-size:13px;color:${t.acc};margin-bottom:20px;text-decoration:none;}
 h1{font-family:${t.fDisplay};font-size:22px;margin-bottom:20px;}
 </style></head><body><div class="page">
-<a class="back" href="../index.html">← 홈으로</a>
+<a class="back" href="/">← 홈으로</a>
 <h1>${esc(config.siteName)} 블로그</h1>
 ${items || '<p style="color:' + t.inkSoft + ';font-size:13px;">아직 글이 없어요.</p>'}
 </div></body></html>`;
@@ -263,9 +264,9 @@ function updateSitemap(config, posts) {
   const today = new Date().toISOString().slice(0, 10);
   const urls = [
     { loc: `${base}/`, mod: today },
-    { loc: `${base}/blog/index.html`, mod: today },
+    { loc: `${base}/blog/`, mod: today },
     ...posts.map(p => ({
-      loc: `${base}/blog/posts/${encodeURIComponent(p.slug)}.html`,
+      loc: `${base}/blog/posts/${encodeURIComponent(p.slug)}`,
       mod: p.date || today
     }))
   ];
@@ -337,7 +338,7 @@ function injectBlogSchema() {
     .filter(u => u.indexOf("/posts/") >= 0);
   const items = [];
   for (const u of urls) {
-    const file = path.join(POSTS_DIR, decodeURIComponent(u.split("/posts/")[1]));
+    const file = path.join(POSTS_DIR, decodeURIComponent(u.split("/posts/")[1]) + ".html");
     if (!fs.existsSync(file)) continue;
     const m = fs.readFileSync(file, "utf8").match(/"headline":\s*("(?:[^"\\]|\\.)*")/);
     if (!m) continue;
@@ -348,7 +349,7 @@ function injectBlogSchema() {
     "@context": "https://schema.org",
     "@type": "Blog",
     name: (cfg.siteName || "") + " 블로그",
-    url: base + "/blog/index.html",
+    url: base + "/blog/",
     inLanguage: "ko-KR",
     publisher: { "@type": "Organization", name: cfg.siteName || "",
                  url: base + "/", logo: { "@type": "ImageObject", url: base + "/og.jpg" } },
