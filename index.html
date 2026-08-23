@@ -272,6 +272,8 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
           text-align:center;padding-top:1px}
   .pz-ab li{text-align:center}
   .pz-or-inline{font-family:var(--latin);font-weight:600;color:var(--or);font-size:0.92em;margin:0 3px}
+  /* 긴 항목이 문장 중간이나 괄호 안에서 잘리지 않도록 덩어리 단위로만 줄바꿈 */
+  .pz-cell .pz-nb{display:inline-block;white-space:nowrap}
   .pz-opt-note{font-style:normal;color:var(--ink-soft)}
 
   /* ---- 추가 옵션 ---- */
@@ -357,11 +359,11 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
     <div class="pz-cell pz-c-draw">
       <ul>
         <li>고객 맞춤 사전 상담</li>
-        <li>퍼스널컬러 3요소 신체색(피부/눈동자/헤어컬러) 체크</li>
+        <li><span class="pz-nb">퍼스널컬러 3요소 신체색</span> <span class="pz-nb">(피부/눈동자/헤어컬러) 체크</span></li>
         <li>퍼스널컬러 12계절 드레이핑 진단</li>
         <li>색조 메이크업 제품 추천</li>
         <li>립 컬러 테스트</li>
-        <li>자체 제작 진단결과지 + 쇼핑 참고용 컬러 카드 제공</li>
+        <li><span class="pz-nb">자체 제작 진단결과지 +</span> <span class="pz-nb">쇼핑 참고용 컬러 카드 제공</span></li>
       </ul>
     </div>
 
@@ -371,7 +373,7 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
         <li>헤어 디자인 + 컬러 추천</li>
         <li>아이브로우 디자인 + 컬러 추천</li>
         <li>네일 디자인 + 컬러 추천</li>
-        <li>렌즈 디자인 + 컬러 추천 <span class="pz-or-inline">OR</span> 안경 디자인 + 컬러 추천</li>
+        <li><span class="pz-nb">렌즈 디자인 + 컬러 추천</span> <span class="pz-or-inline">OR</span> <span class="pz-nb">안경 디자인 + 컬러 추천</span></li>
         <li>이미지에 어울리는 향수 추천</li>
         <li>톤별 맞춤 가이드 제공</li>
         <li>메이크업 파우치 진단</li>
@@ -381,9 +383,9 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
     <div class="pz-cell pz-c-life">
       <ul>
         <li>얼굴 이목구비 골격 AI 정밀 분석</li>
-        <li>얼굴형에 어울리는 메이크업 코칭 (치크 / 하이라이터 / 쉐딩)</li>
+        <li><span class="pz-nb">얼굴형에 어울리는 메이크업 코칭</span> <span class="pz-nb">(치크 / 하이라이터 / 쉐딩)</span></li>
         <li>체형 골격 AI 정밀 분석</li>
-        <li>체형에 알맞는 패션 스타일링 코칭 (디자인 / 컬러 / 소재)</li>
+        <li><span class="pz-nb">체형에 알맞는 패션 스타일링 코칭</span> <span class="pz-nb">(디자인 / 컬러 / 소재)</span></li>
         <li>이미지메이킹 토탈 가이드 제공</li>
       </ul>
     </div>
