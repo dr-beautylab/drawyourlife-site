@@ -63,7 +63,9 @@ ${config.businessInfo}
     },
     body: JSON.stringify({
       model: 'claude-sonnet-5',
-      max_tokens: 3000,
+      // 3000이면 한글 1200~1800자 + HTML 태그가 잘리는 날이 생깁니다.
+      // 잘린 응답은 JSON.parse에서 터져서 그날 글이 통째로 누락됩니다.
+      max_tokens: 8000,
       system: systemPrompt,
       messages: [{ role: 'user', content: userPrompt }]
     })
@@ -71,13 +73,64 @@ ${config.businessInfo}
 
   if (!res.ok) {
     const errText = await res.text();
-    throw new Error(`Claude API 오류 (${res.status}): ${errText}`);
+    const err = new Error(`Claude API 오류 (${res.status}): ${errText.slice(0, 300)}`);
+    // 429(요청 한도)·5xx(서버 혼잡)는 잠시 뒤 다시 시도하면 대부분 성공합니다.
+    err.retryable = res.status === 429 || res.status >= 500;
+    throw err;
   }
 
   const data = await res.json();
+  if (data.stop_reason === 'max_tokens') {
+    const err = new Error('응답이 max_tokens에 잘렸습니다. 재시도합니다.');
+    err.retryable = true;
+    throw err;
+  }
   const text = data.content.map(b => b.text || '').join('');
+  // 모델이 JSON 앞뒤에 설명 문장을 붙이는 날이 있어서,
+  // 첫 '{'부터 마지막 '}'까지만 잘라서 파싱합니다.
   const cleaned = text.replace(/```json|```/g, '').trim();
-  return JSON.parse(cleaned);
+  const start = cleaned.indexOf('{');
+  const end = cleaned.lastIndexOf('}');
+  if (start < 0 || end <= start) {
+    const err = new Error('응답에서 JSON을 찾지 못했습니다: ' + cleaned.slice(0, 200));
+    err.retryable = true;
+    throw err;
+  }
+  let parsed;
+  try {
+    parsed = JSON.parse(cleaned.slice(start, end + 1));
+  } catch (e) {
+    const err = new Error('JSON 파싱 실패: ' + e.message + ' / 앞부분: ' + cleaned.slice(0, 200));
+    err.retryable = true;
+    throw err;
+  }
+  if (!parsed.title || !parsed.bodyHtml) {
+    const err = new Error('title 또는 bodyHtml이 비어 있습니다.');
+    err.retryable = true;
+    throw err;
+  }
+  return parsed;
+}
+
+// API가 혼잡하거나 응답이 잘린 날에도 글이 누락되지 않도록
+// 최대 4번, 점점 길게 기다리며 다시 시도합니다.
+async function callClaudeWithRetry(config, topic, tries = 4) {
+  let lastErr;
+  for (let i = 0; i < tries; i++) {
+    try {
+      return await callClaude(config, topic);
+    } catch (e) {
+      lastErr = e;
+      console.warn(`생성 시도 ${i + 1}/${tries} 실패: ${e.message}`);
+      if (e.retryable === false) break;
+      if (i < tries - 1) {
+        const waitSec = 30 * (i + 1); // 30초 → 60초 → 90초
+        console.warn(`${waitSec}초 뒤 재시도...`);
+        await new Promise(r => setTimeout(r, waitSec * 1000));
+      }
+    }
+  }
+  throw lastErr;
 }
 
 // HTML 속성에 넣을 문자열을 안전하게 이스케이프합니다.
@@ -112,7 +165,7 @@ function extractFaq(bodyHtml) {
 }
 
 function buildPostHTML(config, post, dateStr, others) {
-  // slug 가 비면 canonical/og URL 이 .../undefined 로 찍힙니다.
+  // slug 가 비면 canonical/og URL 이 .../undefined 로 찝히니다.
   // main() 이 항상 채워주지만, 혹시라도 비어 있으면 발행을 멈추는 대신
   // 안전한 이름으로 채워 넣고 경고만 남깁니다.
   if (!post.slug) {
@@ -296,6 +349,15 @@ async function main() {
   }
 
   const used = readJSON(USED_PATH, { usedTopics: [], posts: [] });
+
+  // 하루에 여러 번 실행되어도(실패 대비 예비 실행) 글은 하루 한 편만.
+  // 이미 오늘 날짜 글이 있으면 조용히 끝냅니다.
+  const todayStr = new Date().toISOString().slice(0, 10);
+  if ((used.posts || []).some(p => p.date === todayStr)) {
+    console.log('오늘(' + todayStr + ') 글은 이미 발행되었습니다. 종료합니다.');
+    return;
+  }
+
   let remaining = config.topics.filter(t => !used.usedTopics.includes(t));
   if (remaining.length === 0) {
     used.usedTopics = [];
@@ -305,7 +367,7 @@ async function main() {
 
   console.log('선택된 주제:', topic);
 
-  const post = await callClaude(config, topic);
+  const post = await callClaudeWithRetry(config, topic);
   const slug = slugify(post.title) || slugify(topic) || ('post-' + Date.now());
   const dateStr = new Date().toISOString().slice(0, 10);
 
