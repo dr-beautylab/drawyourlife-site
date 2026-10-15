@@ -324,6 +324,7 @@ function updateSitemap(config, posts) {
   const urls = [
     { loc: `${base}/`, mod: today },
     { loc: `${base}/blog/`, mod: today },
+    { loc: `${base}/wedding/`, mod: today },
     ...posts.map(p => ({
       loc: `${base}/blog/posts/${encodeURIComponent(p.slug)}`,
       mod: p.date || today
