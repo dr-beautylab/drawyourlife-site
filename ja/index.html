@@ -185,6 +185,7 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
 </style>
 <style>
 .tb-btn{white-space:normal;line-height:1.3;font-size:12.5px;padding:8px 4px}
+.tb-list{grid-template-columns:repeat(2,1fr)}
 .page,.page *{font-family:'Pretendard','Noto Sans JP',sans-serif!important}
 .pz-wrap .pz-brand h1,.pz-wrap h2.pz-sec{font-family:'Noto Serif JP',serif!important}
 .pz-brand h1{white-space:normal!important}
@@ -199,6 +200,7 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
         <h1 style="font-family:var(--f-display);font-size:26px;line-height:1.5;margin:0 0 14px;white-space:pre-line;">あなただけの美しさを完成させるトータル・パーソナルイメージ、<span style="color:var(--acc)">Draw Your Life</span></h1>
         <p style="font-size:13.5px;line-height:1.7;color:var(--ink-soft);margin:0 0 22px;white-space:pre-line;">流れ作業のコンサルはしません。
 あなただけのためのプライベートコンサルティング。</p>
+        <div style="margin:0 0 18px;padding:14px 16px;background:#fff;border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:10px;font-size:13px;line-height:1.7;color:var(--ink);">✈️ <b>金浦空港からすぐ！</b>パーソナルカラー診断・骨格診断スタジオ。帰国前の空き時間にぴったり。自分に似合う色を知ってから、韓国でのお買い物をもっと賢く。完全予約制です。</div>
         <div style="display:flex;align-items:center;gap:0;margin:4px 0 20px;padding:14px 8px;background:rgba(255,255,255,.62);border:1px solid var(--line);border-radius:12px;max-width:400px;">
           <div style="flex:1;text-align:center;">
             <div style="font-size:10.5px;color:var(--ink-soft);margin-bottom:5px;letter-spacing:.02em;">累計診断</div>
@@ -217,13 +219,6 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
         </div>
         <a href="https://www.instagram.com/drawyourlife_official/" target="_blank" rel="noopener" style="display:inline-block;background:var(--acc);color:#fff;font-weight:700;font-size:13.5px;padding:13px 22px;border-radius:100px;">InstagramのDMで予約・お問い合わせ</a>
       </div>
-      <nav class="tb-bar" aria-label="サービスを選ぶ">
-        <div class="tb-list" role="tablist">
-          <button class="tb-btn" role="tab" id="tab-image" aria-controls="image" aria-selected="true">イメージコンサル</button>
-          <button class="tb-btn" role="tab" id="tab-wedding" aria-controls="wedding" aria-selected="false" tabindex="-1">ウェディング</button>
-          <button class="tb-btn" role="tab" id="tab-makeup" aria-controls="makeup" aria-selected="false" tabindex="-1">メイクレッスン</button>
-        </div>
-      </nav>
       <div style="padding:36px 24px;">
         <div style="display:flex;gap:16px;align-items:center;margin-bottom:18px;">
           <img src="data:image/webp;base64,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" style="width:76px;height:76px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--acc);" />
@@ -314,24 +309,9 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
 
     <div class="rv-card">
       <div class="rv-stars"><span class="s">★★★★★</span><span class="n">5.0</span></div>
-      <p class="rv-body">前回パーソナルカラーとメイクレッスンを一緒に受けてとても満足だったので、今回は妹とメイクレッスンを受けました！<br>
-        今日も私の希望のスタイルと、どうすれば良いかを丁寧に見てくださって、楽しくレッスンを受けられました！<br>
-        今日習ったことをコツコツ練習して、次は別のメイクを習いに来ます！</p>
-      <div class="rv-src">NAVER予約レビュー（翻訳）</div>
-    </div>
-
-    <div class="rv-card">
-      <div class="rv-stars"><span class="s">★★★★★</span><span class="n">5.0</span></div>
       <p class="rv-body">30歳になる前にぜひ受けてみたかったのですが、大満足です！<br>
         メイク方法も一つひとつ詳しく教えてくださり、自分の色が分かってスッキリしました。服のスタイルからアクセサリーまで一つずつ選んでくださって良かったです！何を聞いても親切に答えてくださり、雰囲気も良くてリラックスできました。<br>
         ありがとうございました！メイクを習いにまた来ます！</p>
-      <div class="rv-src">NAVER予約レビュー（翻訳）</div>
-    </div>
-
-    <div class="rv-card">
-      <div class="rv-stars"><span class="s">★★★★★</span><span class="n">5.0</span></div>
-      <p class="rv-body">姉と一緒にメイクレッスンを受けました。希望のスタイルを自然に分かりやすく教えてくださいました！<br>
-        メイク初心者でしたが、ブラシの使い方から順番に教えてくださり、フィードバックもとても的確でした！</p>
       <div class="rv-src">NAVER予約レビュー（翻訳）</div>
     </div>
 
@@ -454,13 +434,6 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
       <div class="pz-opt-items"><span>顔パーツ・骨格の精密分析</span><span>体型骨格の精密分析</span> <em class="pz-opt-note">PDFでのご提供のみ</em></div>
       <div class="pz-price">1オプションにつき ₩50,000</div>
     </div>
-    <div class="pz-opt-row">
-      <div>美容専攻の大学教授・代表院長が直接指導 <strong>「メイクレッスン」</strong></div>
-      <div class="pz-price pz-cls-price">
-        <span>1名（80分）</span><span class="pz-was">₩180,000</span><span class="pz-now">₩160,000</span>
-        <span>2名（110分）</span><span class="pz-was">₩320,000</span><span class="pz-now">₩290,000</span>
-      </div>
-    </div>
   </div>
 
     <h2 class="pz-sec">コース</h2>
@@ -500,192 +473,6 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
       </div>
       <div style="padding:26px 24px 34px;">
 <div class="fq-wrap"><details class="fq-item"><summary>DRAW・YOUR・LIFEの違いは？</summary><div class="fq-a"><div>後のコースほど前のコースの内容を含みます。<b>DRAW</b>は12シーズンのドレープ診断、カラーメイクアイテム・リップカラーの提案、診断結果シートとカラーカードまで。<b>YOUR</b>はそこにファッション・ジュエリー、ヘア・眉・ネイルデザイン、カラコン・メガネデザイン、香水の提案とメイクポーチ診断が加わります。<b>LIFE</b>は顔の骨格と体型骨格のAI精密分析、メイクコーチングとファッションコーチングまで含むトータルコースです。</div></div></details><details class="fq-item"><summary>診断の所要時間と料金は？</summary><div class="fq-a"><div>1名の場合、DRAW 40分 ₩110,000、YOUR 80分 ₩200,000、LIFE 110分 ₩300,000です。人数が増えるほど1名あたりの料金が下がり、DRAW 3名なら1名あたり ₩85,000です。4名以上の企業・団体予約は別途お問い合わせください。人数別の料金は上の表をご覧ください。</div></div></details><details class="fq-item"><summary>2名以上で予約するとどうなりますか？</summary><div class="fq-a"><div>同じ時間に一緒に進行し、人数が増えるほど1名あたりの料金が下がります。DRAW・YOUR・LIFEいずれも最大3名まで予約でき、4名以上は別途お問い合わせください。</div></div></details><details class="fq-item"><summary>診断結果はどのような形で受け取れますか？</summary><div class="fq-a"><div>オリジナルの診断結果シートと、買い物に持ち歩けるカラーカードをお渡しします。YOURはトーン別ガイド、LIFEはイメージメイキング・トータルガイドが追加されます。</div></div></details></div>
-      </div>
-      </section>
-      <section class="tb-panel" id="wedding" role="tabpanel" aria-labelledby="tab-wedding" hidden>
-      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">WEDDING</span>
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-      </div>
-      <div style="padding:26px 24px 30px;">
-        <a href="https://www.instagram.com/drawyourlife_official/" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit;background:#FFFFFF;border:1px solid var(--line);border-radius:16px;padding:22px 20px;">
-          <div style="font-size:11.5px;letter-spacing:0.08em;color:var(--acc);margin-bottom:8px;">WEDDING CONSULTING</div>
-          <div style="font-size:17px;font-weight:800;line-height:1.5;margin-bottom:8px;">結婚準備中なら、<br>ドレス選びの前に、まず自分のカラーを</div>
-          <div style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);margin-bottom:16px;">パーソナルカラー診断＋ウェディングコンサルを一度に。お色直しドレス、新郎の衣装、ティアラ・ブーケ・ジュエリー、スタジオ・ドレス・メイクの見積もり比較のコツまで、結婚経験のある先輩が一緒に準備します。</div>
-          <span style="display:inline-block;background:var(--acc);color:#fff;font-weight:700;font-size:13px;padding:11px 18px;border-radius:100px;">ウェディングについてDMで相談 →</span>
-        </a>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">PRICE</span>
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-      </div>
-      <div style="padding:24px 24px 30px;">
-<div class="pz-wrap">
-<div class="pz-card">
-    <h2 class="pz-sec">ウェディング</h2>
-  <table>
-    <thead>
-      <tr><th>コース</th><th>人数</th><th>所要時間（分）</th><th>料金</th></tr>
-    </thead>
-    <tbody>
-      <tr class="pz-g-wd">
-        <td rowspan="2" class="pz-grp">WEDDING</td>
-        <td>新郎＋新婦 2名</td><td>110</td><td class="pz-won">計 ₩380,000</td>
-      </tr>
-      <tr class="pz-g-wd"><td>新婦のみ 1名</td><td>80</td><td class="pz-won">₩270,000</td></tr>
-    </tbody>
-  </table>
-  <p class="pz-note">※ 新婦様お一人でのコンサルは可能ですが、新郎様お一人でのコンサルは行っておりません。</p>
-</div>
-</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">FAQ</span>
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-      </div>
-      <div style="padding:26px 24px 34px;">
-<div class="fq-wrap"><details class="fq-item"><summary>ウェディングコンサルはどのように進みますか？</summary><div class="fq-a"><div>パーソナルカラー診断とウェディングコンサルを一度に行います。ドレープ診断でベスト・セカンド・ワーストカラーを見つけ、その結果をもとに前撮り・挙式・お色直しのドレス、新郎の衣装とネクタイ、ティアラ・ベール・ジュエリー・ブーケ・ネイル、韓服、ハネムーンのペアルックまでご提案します。スタジオ・ドレス・メイクの見積もり比較など、結婚準備のコツもお伝えします。新郎＋新婦2名 110分 ₩380,000、新婦1名 80分 ₩270,000です。新婦様だけのご来店でも、新郎様のパーソナルカラー診断以外はすべて行います。ウェディングのスタイリングは新婦様を基準に決まるため、新郎様お一人でのコンサルは行っておりません。</div></div></details></div>
-      </div>
-      </section>
-      <section class="tb-panel" id="makeup" role="tabpanel" aria-labelledby="tab-makeup" hidden>
-      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">MAKEUP</span>
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-      </div>
-      <div style="padding:26px 24px 30px;">
-        <div style="background:#FFFFFF;border:1px solid var(--line);border-radius:16px;padding:22px 20px;">
-          <div style="font-size:11.5px;letter-spacing:0.08em;color:var(--acc);margin-bottom:8px;">MAKEUP CLASS</div>
-          <h2 style="font-size:18px;font-weight:800;line-height:1.5;margin-bottom:6px;">メイクレッスン＋顔の骨格診断</h2>
-          <div style="font-size:13px;font-weight:700;color:var(--acc);line-height:1.5;margin-bottom:12px;">Draw Your Lifeだけの唯一無二のメイクレッスン</div>
-          <p style="font-size:12.5px;line-height:1.75;color:var(--ink-soft);">YouTubeやSNSを見て同じようにまねしても、自分の顔だと何だか違和感があった…そんな経験、一度はありますよね。骨格、肌トーン、パーツの左右差は人それぞれ違うので、みんなと同じメイクではなく「自分に合うメイク」があるのです。</p>
-        </div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">CURRICULUM</span>
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-      </div>
-      <div style="padding:30px 24px 30px;">
-        <h2 style="font-size:18px;line-height:1.5;margin:0 0 8px;font-weight:800;">マンツーマン・メイクレッスンのカリキュラム</h2>
-        <p style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);margin:0 0 18px;">基礎スキンケアからカラーメイクの使い方まで、自分の顔を正しく理解し、気になる部分をカバーする方法を1対1で細かく学びます。</p>
-        <div style="background:#FFFFFF;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:22px;">
-          <div style="font-size:14px;font-weight:700;margin-bottom:5px;">事前カウンセリング＆イメージコンサル</div>
-          <div style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);">ご希望のイメージと普段のメイクのお悩みを分析し、あなたに合わせたレッスンの方向性を決めます。</div>
-        </div>
-        <div style="font-size:12px;letter-spacing:0.04em;color:var(--acc);font-weight:700;margin-bottom:2px;">お悩みの例</div>
-        <div>
-          <div style="display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);">
-            <div style="font-family:var(--f-display);font-size:16px;font-weight:800;color:var(--acc);flex-shrink:0;width:18px;">1</div>
-            <div>
-              <div style="font-size:14px;font-weight:700;margin-bottom:5px;">崩れないスキンケア＆ベース</div>
-              <div style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);">メイクの仕上がりを左右する正しいスキンケア方法と、薄く密着するベースのテクニックをお伝えします。</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);">
-            <div style="font-family:var(--f-display);font-size:16px;font-weight:800;color:var(--acc);flex-shrink:0;width:18px;">2</div>
-            <div>
-              <div style="font-size:14px;font-weight:700;margin-bottom:5px;">顔型に合わせた輪郭＆眉メイク</div>
-              <div style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);">顔の骨格に合ったシェーディングとハイライトで立体感を出し、印象を決める一番大切な眉を顔型に合わせて整え、自然に描く方法をコーチングします。</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);">
-            <div style="font-family:var(--f-display);font-size:16px;font-weight:800;color:var(--acc);flex-shrink:0;width:18px;">3</div>
-            <div>
-              <div style="font-size:14px;font-weight:700;margin-bottom:5px;">目元を整えるアイメイク</div>
-              <div style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);">一重・二重、目尻の形など、目の形に合わせたアイシャドウの範囲、アイラインの引き方、にじまないマスカラの使い方をマンツーマンで丁寧にお教えします。</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:14px;padding:15px 0;">
-            <div style="font-family:var(--f-display);font-size:16px;font-weight:800;color:var(--acc);flex-shrink:0;width:18px;">4</div>
-            <div>
-              <div style="font-size:14px;font-weight:700;margin-bottom:5px;">血色を足すリップ＆チーク</div>
-              <div style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);">顔に自然な血色と立体感を与えるチークの位置を決め、唇の形に合ったリップメイクの方法を学びます。</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">DIFFERENCE</span>
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-      </div>
-      <div style="padding:30px 24px 30px;">
-        <h2 style="font-size:18px;line-height:1.5;margin:0 0 6px;font-weight:800;">ここが違います</h2>
-        <div>
-          <div style="display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);">
-            <div style="font-family:var(--f-display);font-size:16px;font-weight:800;color:var(--acc);flex-shrink:0;width:18px;">1</div>
-            <div>
-              <div style="font-size:14px;font-weight:700;margin-bottom:5px;">大学教授がレベルに合わせて指導</div>
-              <div style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);">メイクを一度もしたことがない初心者でも分かりやすいよう、ブラシの持ち方から力の抜き方まで、専門用語を使わず日常の言葉で原理を説明します。代表院長が顔の片側を実演しながら教え、もう片側はご自身でまねして描きながらスキルを身につけます。</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:14px;padding:15px 0;">
-            <div style="font-family:var(--f-display);font-size:16px;font-weight:800;color:var(--acc);flex-shrink:0;width:18px;">2</div>
-            <div>
-              <div style="font-size:14px;font-weight:700;margin-bottom:5px;">徹底したオーダーメイド指導</div>
-              <div style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);">お客様の顔を把握し、長所は最大限に、短所は自然にカバーするスキルをお伝えします。</div>
-            </div>
-          </div>
-        </div>
-        <p style="font-size:13px;line-height:1.75;color:var(--ink);margin:22px 0 18px;">あなただけの美しさを描く時間。Draw Your Lifeで、一生使える本物のメイクスキルを身につけてください。</p>
-        <a href="https://www.instagram.com/drawyourlife_official/" target="_blank" rel="noopener" style="display:inline-block;background:var(--acc);color:#fff;font-weight:700;font-size:13px;padding:11px 18px;border-radius:100px;">InstagramのDMで予約・お問い合わせ →</a>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">PRICE</span>
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-      </div>
-      <div style="padding:24px 24px 30px;">
-<div class="pz-wrap">
-<div class="pz-card">
-    <h2 class="pz-sec">メイクレッスン</h2>
-  <table>
-    <thead>
-      <tr><th>クラス</th><th>人数</th><th>所要時間（分）</th><th>料金</th></tr>
-    </thead>
-    <tbody>
-      <tr class="pz-g-draw">
-        <td rowspan="2" class="pz-grp">1Day</td>
-        <td>1名</td><td>80</td><td class="pz-won">1名あたり ₩180,000</td>
-      </tr>
-      <tr class="pz-g-draw"><td>2名</td><td>110</td><td class="pz-won">1名あたり ₩160,000</td></tr>
-      <tr class="pz-g-your pz-grp-start">
-        <td rowspan="2" class="pz-grp">3Day<small>1Day × 3回</small></td>
-        <td>1名</td><td>80</td><td class="pz-won">1名あたり ₩160,000</td>
-      </tr>
-      <tr class="pz-g-your"><td>2名</td><td>110</td><td class="pz-won">1名あたり ₩140,000</td></tr>
-      <tr class="pz-g-life pz-grp-start">
-        <td class="pz-grp">美容系入試対策クラス</td>
-        <td>最大4名</td><td>お問い合わせ</td><td>お問い合わせ</td>
-      </tr>
-    </tbody>
-  </table>
-  <p class="pz-note">※ 3Dayクラスの所要時間は<strong>1回あたり</strong>の時間です。（1Dayコース × 3回）</p>
-
-  <div class="pz-opt" style="margin-top:0">
-    <h3>* イメージコンサルと一緒に予約する場合</h3>
-    <div class="pz-opt-row">
-      <div>美容専攻の大学教授・代表院長が直接指導 <strong>「メイクレッスン」</strong></div>
-      <div class="pz-price pz-cls-price">
-        <span>1名（80分）</span><span class="pz-was">₩180,000</span><span class="pz-now">₩160,000</span>
-        <span>2名（110分）</span><span class="pz-was">₩320,000</span><span class="pz-now">₩290,000</span>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">FAQ</span>
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-      </div>
-      <div style="padding:26px 24px 34px;">
-<div class="fq-wrap"><details class="fq-item"><summary>メイクレッスンはコンサルとは別ですか？</summary><div class="fq-a"><div>別のコースで、美容専攻の大学教授である代表院長が直接担当します。まずカウンセリングでお悩みを把握してからレッスンを行い、院長が実演したらすぐに実習、また実演して実習…と区切りながら細かく進めます。イメージコンサルと一緒に予約すると割引が適用されるため、両方お申し込みになる方が一番多いです。</div></div></details></div>
       </div>
       </section>
 
@@ -767,30 +554,6 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
         "@type": "Offer",
         "name": "LIFEコンサル（3名・140分・1名あたり）",
         "price": "230000",
-        "priceCurrency": "KRW"
-      },
-      {
-        "@type": "Offer",
-        "name": "ウェディングコンサル（新郎＋新婦2名・110分・合計）",
-        "price": "380000",
-        "priceCurrency": "KRW"
-      },
-      {
-        "@type": "Offer",
-        "name": "ウェディングコンサル（新婦1名・80分）",
-        "price": "270000",
-        "priceCurrency": "KRW"
-      },
-      {
-        "@type": "Offer",
-        "name": "メイクレッスン 1Day（1名・80分）",
-        "price": "180000",
-        "priceCurrency": "KRW"
-      },
-      {
-        "@type": "Offer",
-        "name": "メイクレッスン 3Day（1名・1回80分）",
-        "price": "160000",
         "priceCurrency": "KRW"
       }
     ]
@@ -892,22 +655,6 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
     },
     {
       "@type": "Question",
-      "name": "ウェディングコンサルはどのように進みますか？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "パーソナルカラー診断とウェディングコンサルを一度に行います。ドレープ診断でベスト・セカンド・ワーストカラーを見つけ、その結果をもとに前撮り・挙式・お色直しのドレス、新郎の衣装とネクタイ、ティアラ・ベール・ジュエリー・ブーケ・ネイル、韓服、ハネムーンのペアルックまでご提案します。スタジオ・ドレス・メイクの見積もり比較など、結婚準備のコツもお伝えします。新郎＋新婦2名 110分 ₩380,000、新婦1名 80分 ₩270,000です。新婦様だけのご来店でも、新郎様のパーソナルカラー診断以外はすべて行います。ウェディングのスタイリングは新婦様を基準に決まるため、新郎様お一人でのコンサルは行っておりません。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "メイクレッスンはコンサルとは別ですか？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "別のコースで、美容専攻の大学教授である代表院長が直接担当します。まずカウンセリングでお悩みを把握してからレッスンを行い、院長が実演したらすぐに実習、また実演して実習…と区切りながら細かく進めます。イメージコンサルと一緒に予約すると割引が適用されるため、両方お申し込みになる方が一番多いです。"
-      }
-    },
-    {
-      "@type": "Question",
       "name": "診断の前にメイクをして行ってもいいですか？",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -929,10 +676,59 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
         "@type": "Answer",
         "text": "ソウル特別市江西区麻谷（マゴク）中央6路21 711号（金浦空港の近く）です。NAVER MapやGoogleマップで「당신을 그리다」と検索してください。ご予約はInstagramのDMで承ります。営業時間は平日11:00〜19:00、土日・祝日11:00〜17:00で、代表院長の大学の講義スケジュールにより変更になる場合があります。"
       }
+    },
+    {
+      "@type": "Question",
+      "name": "言葉は通じますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "簡単な英語でOKです。日本語は翻訳アプリを使って丁寧にご案内します。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "金浦空港（GMP）からの行き方は？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "約10分です！地下鉄5号線で麻谷（マゴク）駅、または9号線・空港鉄道（AREX）で麻谷ナル（マゴンナル）駅へ。タクシーでもすぐです。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "スーツケースを持って行ってもいいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "はい、お持ち込みOKです。当日のお荷物の保管はスケジュールによりますので、事前にDMでご確認ください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "予約方法は？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "完全予約制です。Instagram DM @drawyourlife_official からご予約ください（英語・日本語OK）。NAVER予約もご利用いただけます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "支払い方法と駐車場は？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "海外発行のクレジットカード（Visa・Mastercard）がご利用いただけます。駐車場もあります。"
+      }
     }
   ]
 }
 </script>
+      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">INTERNATIONAL</span>
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+      </div>
+      <div style="padding:26px 24px 34px;">
+        <h2 style="font-size:17px;font-weight:800;margin:0 0 14px;">海外からのお客様へ よくある質問</h2>
+<div class="fq-wrap"><details class="fq-item"><summary>言葉は通じますか？</summary><div class="fq-a"><div>簡単な英語でOKです。日本語は翻訳アプリを使って丁寧にご案内します。</div></div></details><details class="fq-item"><summary>金浦空港（GMP）からの行き方は？</summary><div class="fq-a"><div>約10分です！地下鉄5号線で麻谷（マゴク）駅、または9号線・空港鉄道（AREX）で麻谷ナル（マゴンナル）駅へ。タクシーでもすぐです。</div></div></details><details class="fq-item"><summary>スーツケースを持って行ってもいいですか？</summary><div class="fq-a"><div>はい、お持ち込みOKです。当日のお荷物の保管はスケジュールによりますので、事前にDMでご確認ください。</div></div></details><details class="fq-item"><summary>予約方法は？</summary><div class="fq-a"><div>完全予約制です。Instagram DM <a href="https://www.instagram.com/drawyourlife_official/" target="_blank" rel="noopener" style="color:var(--acc)">@drawyourlife_official</a> からご予約ください（英語・日本語OK）。NAVER予約もご利用いただけます。</div></div></details><details class="fq-item"><summary>支払い方法と駐車場は？</summary><div class="fq-a"><div>海外発行のクレジットカード（Visa・Mastercard）がご利用いただけます。駐車場もあります。</div></div></details></div>
+      </div>
       <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
         <div style="flex:1;height:1px;background:var(--line);"></div>
         <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">BOOKING</span>
@@ -953,7 +749,7 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
           </div>
         <p style="font-size:11.5px;line-height:1.7;color:rgba(255,255,255,0.75);margin:16px 0 0;">Draw Your Life（당신을 그리다）では、美容芸術学の学士・修士・博士を持つ現役の美容専攻大学教授で、2016年からパーソナルカラーを研究しKCI掲載論文を執筆している代表院長パク・ヒョンジョンが直接診断します。</p>
         <p style="font-size:11.5px;line-height:1.7;color:rgba(255,255,255,0.75);margin:12px 0 0;">住所：서울특별시 강서구 마곡중앙6로 21, 711호</p>
-        <a href="https://www.instagram.com/drawyourlife_official/" target="_blank" rel="noopener" style="display:block;text-align:center;margin-top:20px;background:#fff;color:var(--acc-dark);font-weight:800;padding:15px;border-radius:100px;font-size:15.5px;">InstagramのDMで予約・お問い合わせ</a><p style="font-size:12px;line-height:1.7;color:rgba(255,255,255,0.9);margin:10px 0 0;text-align:center;">Instagram：@drawyourlife_official（日本語でお気軽にどうぞ）</p>
+        <a href="https://www.instagram.com/drawyourlife_official/" target="_blank" rel="noopener" style="display:block;text-align:center;margin-top:20px;background:#fff;color:var(--acc-dark);font-weight:800;padding:15px;border-radius:100px;font-size:15.5px;">InstagramのDMで予約・お問い合わせ</a><p style="font-size:12px;line-height:1.7;color:rgba(255,255,255,0.9);margin:10px 0 0;text-align:center;">Instagram：@drawyourlife_official（日本語でお気軽にどうぞ）</p><a href="https://maps.app.goo.gl/EJWTYMtYBL8mupuXA" target="_blank" rel="noopener" style="display:block;text-align:center;margin-top:12px;border:1px solid rgba(255,255,255,0.6);color:#fff;font-weight:700;padding:12px;border-radius:100px;font-size:13.5px;">📍 Googleマップで見る</a>
         <a href="https://drbeautylab.co.kr/" target="_blank" style="display:block;text-align:center;margin-top:12px;color:rgba(255,255,255,0.85);font-size:12px;text-decoration:underline;">姉妹ブランド・眉アートメイク専門「Dr. Beauty Lab」が気になる方はこちら →</a>
       </div></div>
 <script>

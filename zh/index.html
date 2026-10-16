@@ -185,6 +185,7 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
 </style>
 <style>
 .tb-btn{white-space:normal;line-height:1.3;font-size:12.5px;padding:8px 4px}
+.tb-list{grid-template-columns:repeat(2,1fr)}
 .page,.page *{font-family:'Pretendard','Noto Sans TC',sans-serif!important}
 .pz-wrap .pz-brand h1,.pz-wrap h2.pz-sec{font-family:'Noto Serif TC',serif!important}
 .pz-brand h1{white-space:normal!important}
@@ -199,6 +200,7 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
         <h1 style="font-family:var(--f-display);font-size:26px;line-height:1.5;margin:0 0 14px;white-space:pre-line;">成就專屬於你的美，全方位個人形象諮詢 <span style="color:var(--acc)">Draw Your Life</span></h1>
         <p style="font-size:13.5px;line-height:1.7;color:var(--ink-soft);margin:0 0 22px;white-space:pre-line;">拒絕流水線式諮詢，
 只為你一人的私人諮詢。</p>
+        <div style="margin:0 0 18px;padding:14px 16px;background:#fff;border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:10px;font-size:13px;line-height:1.7;color:var(--ink);">✈️ <b>金浦機場附近！</b>位於首爾麻谷的個人色彩・骨架診斷工作室，回國前的完美行程。先找到適合自己的顏色，在韓國購物更聰明。採預約制。</div>
         <div style="display:flex;align-items:center;gap:0;margin:4px 0 20px;padding:14px 8px;background:rgba(255,255,255,.62);border:1px solid var(--line);border-radius:12px;max-width:400px;">
           <div style="flex:1;text-align:center;">
             <div style="font-size:10.5px;color:var(--ink-soft);margin-bottom:5px;letter-spacing:.02em;">累計診斷</div>
@@ -217,13 +219,6 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
         </div>
         <a href="https://www.instagram.com/drawyourlife_official/" target="_blank" rel="noopener" style="display:inline-block;background:var(--acc);color:#fff;font-weight:700;font-size:13.5px;padding:13px 22px;border-radius:100px;">Instagram 私訊預約・諮詢</a>
       </div>
-      <nav class="tb-bar" aria-label="選擇服務">
-        <div class="tb-list" role="tablist">
-          <button class="tb-btn" role="tab" id="tab-image" aria-controls="image" aria-selected="true">形象諮詢</button>
-          <button class="tb-btn" role="tab" id="tab-wedding" aria-controls="wedding" aria-selected="false" tabindex="-1">婚禮諮詢</button>
-          <button class="tb-btn" role="tab" id="tab-makeup" aria-controls="makeup" aria-selected="false" tabindex="-1">彩妝課程</button>
-        </div>
-      </nav>
       <div style="padding:36px 24px;">
         <div style="display:flex;gap:16px;align-items:center;margin-bottom:18px;">
           <img src="data:image/webp;base64,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" style="width:76px;height:76px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--acc);" />
@@ -314,24 +309,9 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
 
     <div class="rv-card">
       <div class="rv-stars"><span class="s">★★★★★</span><span class="n">5.0</span></div>
-      <p class="rv-body">上次做個人色彩時一起上了彩妝課，非常滿意，所以這次和妹妹一起來上彩妝課！<br>
-        今天也仔細看了我想要的風格和該怎麼畫，上課很開心！<br>
-        會好好練習今天學的，下次再來學別的妝！</p>
-      <div class="rv-src">Naver 預約評價（翻譯）</div>
-    </div>
-
-    <div class="rv-card">
-      <div class="rv-stars"><span class="s">★★★★★</span><span class="n">5.0</span></div>
       <p class="rv-body">一直很想在30歲之前做一次，滿意度爆表！<br>
         化妝方法也一步一步詳細教我，找到自己的顏色真的豁然開朗。從穿搭風格到飾品都一一幫我挑，太棒了！什麼問題都親切解答，氣氛也很好很放鬆。<br>
         謝謝！還會再來學化妝！</p>
-      <div class="rv-src">Naver 預約評價（翻譯）</div>
-    </div>
-
-    <div class="rv-card">
-      <div class="rv-stars"><span class="s">★★★★★</span><span class="n">5.0</span></div>
-      <p class="rv-body">和姐姐一起來上彩妝課，老師依照我們想要的風格，教得很自然又清楚！<br>
-        第一次化妝，從刷具用法開始一步步教，回饋也非常到位！</p>
       <div class="rv-src">Naver 預約評價（翻譯）</div>
     </div>
 
@@ -454,13 +434,6 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
       <div class="pz-opt-items"><span>臉部五官骨架精密分析</span><span>體型骨架精密分析</span> <em class="pz-opt-note">僅提供PDF</em></div>
       <div class="pz-price">每項 ₩50,000</div>
     </div>
-    <div class="pz-opt-row">
-      <div>美容系大學教授代表院長親授 <strong>「彩妝課程」</strong></div>
-      <div class="pz-price pz-cls-price">
-        <span>1人（80分鐘）</span><span class="pz-was">₩180,000</span><span class="pz-now">₩160,000</span>
-        <span>2人（110分鐘）</span><span class="pz-was">₩320,000</span><span class="pz-now">₩290,000</span>
-      </div>
-    </div>
   </div>
 
     <h2 class="pz-sec">方案</h2>
@@ -500,192 +473,6 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
       </div>
       <div style="padding:26px 24px 34px;">
 <div class="fq-wrap"><details class="fq-item"><summary>DRAW・YOUR・LIFE 有什麼不同？</summary><div class="fq-a"><div>後面的方案包含前面方案的所有內容。<b>DRAW</b>包含12季型色布比色診斷、彩妝產品與唇色推薦、診斷結果單與色卡。<b>YOUR</b>再加上穿搭與飾品、髮型・眉型・美甲設計、彩色隱形眼鏡・眼鏡款式、香水推薦與化妝包診斷。<b>LIFE</b>是全方位方案，再加上臉部與體型骨架AI精密分析、彩妝指導與穿搭指導。</div></div></details><details class="fq-item"><summary>個人色彩診斷的時間和價格是？</summary><div class="fq-a"><div>1人價格：DRAW 40分鐘 ₩110,000、YOUR 80分鐘 ₩200,000、LIFE 110分鐘 ₩300,000。人數越多每人越便宜，DRAW 3人每人 ₩85,000。4人以上團體預約請另行洽詢。各人數價格請見上方價目表。</div></div></details><details class="fq-item"><summary>2人以上一起預約會怎麼進行？</summary><div class="fq-a"><div>同一時段一起進行，人數越多每人越便宜。DRAW・YOUR・LIFE 皆最多可預約3人，4人以上請另行洽詢。</div></div></details><details class="fq-item"><summary>診斷結果會以什麼形式提供？</summary><div class="fq-a"><div>提供自製診斷結果單，以及購物時可隨身攜帶的色卡。YOUR 另附色調專屬指南，LIFE 另附形象打造全方位指南。</div></div></details></div>
-      </div>
-      </section>
-      <section class="tb-panel" id="wedding" role="tabpanel" aria-labelledby="tab-wedding" hidden>
-      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">WEDDING</span>
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-      </div>
-      <div style="padding:26px 24px 30px;">
-        <a href="https://www.instagram.com/drawyourlife_official/" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit;background:#FFFFFF;border:1px solid var(--line);border-radius:16px;padding:22px 20px;">
-          <div style="font-size:11.5px;letter-spacing:0.08em;color:var(--acc);margin-bottom:8px;">WEDDING CONSULTING</div>
-          <div style="font-size:17px;font-weight:800;line-height:1.5;margin-bottom:8px;">正在準備婚禮的話，<br>挑婚紗之前，先找到自己的顏色</div>
-          <div style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);margin-bottom:16px;">個人色彩診斷＋婚禮諮詢一次完成。第二套禮服、新郎禮服、皇冠・捧花・珠寶，連婚紗攝影・禮服・新秘方案的比價訣竅，由已婚過來人陪你一起準備。</div>
-          <span style="display:inline-block;background:var(--acc);color:#fff;font-weight:700;font-size:13px;padding:11px 18px;border-radius:100px;">私訊諮詢婚禮方案 →</span>
-        </a>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">PRICE</span>
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-      </div>
-      <div style="padding:24px 24px 30px;">
-<div class="pz-wrap">
-<div class="pz-card">
-    <h2 class="pz-sec">婚禮諮詢</h2>
-  <table>
-    <thead>
-      <tr><th>方案</th><th>人數</th><th>時間（分鐘）</th><th>價格</th></tr>
-    </thead>
-    <tbody>
-      <tr class="pz-g-wd">
-        <td rowspan="2" class="pz-grp">WEDDING</td>
-        <td>新郎＋新娘 2人</td><td>110</td><td class="pz-won">共 ₩380,000</td>
-      </tr>
-      <tr class="pz-g-wd"><td>新娘 1人</td><td>80</td><td class="pz-won">₩270,000</td></tr>
-    </tbody>
-  </table>
-  <p class="pz-note">※ 新娘可單獨諮詢，但不提供新郎單獨諮詢。</p>
-</div>
-</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">FAQ</span>
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-      </div>
-      <div style="padding:26px 24px 34px;">
-<div class="fq-wrap"><details class="fq-item"><summary>婚禮諮詢怎麼進行？</summary><div class="fq-a"><div>個人色彩診斷與婚禮諮詢一次進行。透過色布比色找出最佳・次佳・最不適合的顏色，並以此為基準，針對拍婚紗照・婚禮當天・第二套禮服的禮服挑選、新郎禮服與領帶、皇冠・頭紗・珠寶・捧花・美甲、韓服，以及蜜月情侶裝提供建議。也會分享婚紗攝影・禮服・新秘方案比價等備婚訣竅。新郎＋新娘2人 110分鐘 ₩380,000，新娘1人 80分鐘 ₩270,000；只有新娘來，也會進行除新郎個人色彩診斷以外的所有內容。婚禮造型以新娘為基準，因此不提供新郎單獨諮詢。</div></div></details></div>
-      </div>
-      </section>
-      <section class="tb-panel" id="makeup" role="tabpanel" aria-labelledby="tab-makeup" hidden>
-      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">MAKEUP</span>
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-      </div>
-      <div style="padding:26px 24px 30px;">
-        <div style="background:#FFFFFF;border:1px solid var(--line);border-radius:16px;padding:22px 20px;">
-          <div style="font-size:11.5px;letter-spacing:0.08em;color:var(--acc);margin-bottom:8px;">MAKEUP CLASS</div>
-          <h2 style="font-size:18px;font-weight:800;line-height:1.5;margin-bottom:6px;">彩妝課程＋臉部骨架診斷</h2>
-          <div style="font-size:13px;font-weight:700;color:var(--acc);line-height:1.5;margin-bottom:12px;">Draw Your Life 獨有的彩妝課程</div>
-          <p style="font-size:12.5px;line-height:1.75;color:var(--ink-soft);">看著YouTube或社群一模一樣跟著畫，放在自己臉上卻很違和——相信大家都有過這種經驗。每個人的骨架、膚色、五官不對稱程度都不同，所以真正適合你的不是和別人一樣的畫法，而是「適合自己的畫法」。</p>
-        </div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">CURRICULUM</span>
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-      </div>
-      <div style="padding:30px 24px 30px;">
-        <h2 style="font-size:18px;line-height:1.5;margin:0 0 8px;font-weight:800;">貼身彩妝課程內容</h2>
-        <p style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);margin:0 0 18px;">從基礎保養到彩妝運用，一對一細緻學習真正了解自己的臉、修飾缺點的方法。</p>
-        <div style="background:#FFFFFF;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:22px;">
-          <div style="font-size:14px;font-weight:700;margin-bottom:5px;">事前諮詢及形象諮詢</div>
-          <div style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);">分析你想要的形象和平時的化妝煩惱，設定專屬的課程方向。</div>
-        </div>
-        <div style="font-size:12px;letter-spacing:0.04em;color:var(--acc);font-weight:700;margin-bottom:2px;">常見煩惱</div>
-        <div>
-          <div style="display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);">
-            <div style="font-family:var(--f-display);font-size:16px;font-weight:800;color:var(--acc);flex-shrink:0;width:18px;">1</div>
-            <div>
-              <div style="font-size:14px;font-weight:700;margin-bottom:5px;">不脫妝的保養與底妝</div>
-              <div style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);">教你決定妝容完成度的正確保養方法，以及輕薄服貼的底妝技巧。</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);">
-            <div style="font-family:var(--f-display);font-size:16px;font-weight:800;color:var(--acc);flex-shrink:0;width:18px;">2</div>
-            <div>
-              <div style="font-size:14px;font-weight:700;margin-bottom:5px;">依臉型打造的修容與眉妝</div>
-              <div style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);">用適合自己骨架的修容與打亮做出立體感，並指導如何依臉型修整、自然畫出決定印象最重要的眉毛。</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);">
-            <div style="font-family:var(--f-display);font-size:16px;font-weight:800;color:var(--acc);flex-shrink:0;width:18px;">3</div>
-            <div>
-              <div style="font-size:14px;font-weight:700;margin-bottom:5px;">修飾眼型的眼妝</div>
-              <div style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);">依單雙眼皮、眼尾形狀等眼型，貼身教你眼影範圍設定、眼線畫法，以及不暈妝的睫毛膏用法。</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:14px;padding:15px 0;">
-            <div style="font-family:var(--f-display);font-size:16px;font-weight:800;color:var(--acc);flex-shrink:0;width:18px;">4</div>
-            <div>
-              <div style="font-size:14px;font-weight:700;margin-bottom:5px;">增添氣色的唇妝與腮紅</div>
-              <div style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);">找到能帶來自然氣色與立體感的腮紅位置，學習適合自己唇形的唇妝畫法。</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">DIFFERENCE</span>
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-      </div>
-      <div style="padding:30px 24px 30px;">
-        <h2 style="font-size:18px;line-height:1.5;margin:0 0 6px;font-weight:800;">我們的不同之處</h2>
-        <div>
-          <div style="display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);">
-            <div style="font-family:var(--f-display);font-size:16px;font-weight:800;color:var(--acc);flex-shrink:0;width:18px;">1</div>
-            <div>
-              <div style="font-size:14px;font-weight:700;margin-bottom:5px;">大學教授依你的程度量身教學</div>
-              <div style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);">就算是從沒化過妝的新手也能輕鬆理解，從怎麼握刷具到怎麼放輕力道，都不用專業術語、以日常語言說明原理。代表院長示範半邊臉，另外半邊由你親手跟著畫，學會彩妝技巧。</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:14px;padding:15px 0;">
-            <div style="font-family:var(--f-display);font-size:16px;font-weight:800;color:var(--acc);flex-shrink:0;width:18px;">2</div>
-            <div>
-              <div style="font-size:14px;font-weight:700;margin-bottom:5px;">徹底客製化教學</div>
-              <div style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);">掌握你的臉部特點，傳授放大優點、自然修飾缺點的技巧。</div>
-            </div>
-          </div>
-        </div>
-        <p style="font-size:13px;line-height:1.75;color:var(--ink);margin:22px 0 18px;">描繪專屬於你的美的時光，在 Draw Your Life 學會受用一生的真正彩妝技巧。</p>
-        <a href="https://www.instagram.com/drawyourlife_official/" target="_blank" rel="noopener" style="display:inline-block;background:var(--acc);color:#fff;font-weight:700;font-size:13px;padding:11px 18px;border-radius:100px;">Instagram 私訊預約・諮詢 →</a>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">PRICE</span>
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-      </div>
-      <div style="padding:24px 24px 30px;">
-<div class="pz-wrap">
-<div class="pz-card">
-    <h2 class="pz-sec">彩妝課程</h2>
-  <table>
-    <thead>
-      <tr><th>課程</th><th>人數</th><th>時間（分鐘）</th><th>價格</th></tr>
-    </thead>
-    <tbody>
-      <tr class="pz-g-draw">
-        <td rowspan="2" class="pz-grp">1Day</td>
-        <td>1人</td><td>80</td><td class="pz-won">每人 ₩180,000</td>
-      </tr>
-      <tr class="pz-g-draw"><td>2人</td><td>110</td><td class="pz-won">每人 ₩160,000</td></tr>
-      <tr class="pz-g-your pz-grp-start">
-        <td rowspan="2" class="pz-grp">3Day<small>1Day × 3次</small></td>
-        <td>1人</td><td>80</td><td class="pz-won">每人 ₩160,000</td>
-      </tr>
-      <tr class="pz-g-your"><td>2人</td><td>110</td><td class="pz-won">每人 ₩140,000</td></tr>
-      <tr class="pz-g-life pz-grp-start">
-        <td class="pz-grp">美容升學考試班</td>
-        <td>最多4人</td><td>請洽詢</td><td>請洽詢</td>
-      </tr>
-    </tbody>
-  </table>
-  <p class="pz-note">※ 3Day 課程標示的時間為<strong>每次</strong>上課時間。（1Day 課程 × 3次）</p>
-
-  <div class="pz-opt" style="margin-top:0">
-    <h3>* 與形象諮詢一起預約時</h3>
-    <div class="pz-opt-row">
-      <div>美容系大學教授代表院長親授 <strong>「彩妝課程」</strong></div>
-      <div class="pz-price pz-cls-price">
-        <span>1人（80分鐘）</span><span class="pz-was">₩180,000</span><span class="pz-now">₩160,000</span>
-        <span>2人（110分鐘）</span><span class="pz-was">₩320,000</span><span class="pz-now">₩290,000</span>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">FAQ</span>
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-      </div>
-      <div style="padding:26px 24px 34px;">
-<div class="fq-wrap"><details class="fq-item"><summary>彩妝課程和諮詢是分開的嗎？</summary><div class="fq-a"><div>是另外的課程，由美容系大學教授代表院長親自授課。先透過諮詢了解你的煩惱再上課，院長示範後馬上跟著練習，再示範、再練習，分段細緻地進行。與形象諮詢一起預約可享折扣，所以大多數人都會兩者一起報名。</div></div></details></div>
       </div>
       </section>
 
@@ -767,30 +554,6 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
         "@type": "Offer",
         "name": "LIFE 諮詢（3人・140分鐘・每人）",
         "price": "230000",
-        "priceCurrency": "KRW"
-      },
-      {
-        "@type": "Offer",
-        "name": "婚禮諮詢（新郎＋新娘2人・110分鐘・合計）",
-        "price": "380000",
-        "priceCurrency": "KRW"
-      },
-      {
-        "@type": "Offer",
-        "name": "婚禮諮詢（新娘1人・80分鐘）",
-        "price": "270000",
-        "priceCurrency": "KRW"
-      },
-      {
-        "@type": "Offer",
-        "name": "彩妝課程 1Day（1人・80分鐘）",
-        "price": "180000",
-        "priceCurrency": "KRW"
-      },
-      {
-        "@type": "Offer",
-        "name": "彩妝課程 3Day（1人・每次80分鐘）",
-        "price": "160000",
         "priceCurrency": "KRW"
       }
     ]
@@ -892,22 +655,6 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
     },
     {
       "@type": "Question",
-      "name": "婚禮諮詢怎麼進行？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "個人色彩診斷與婚禮諮詢一次進行。透過色布比色找出最佳・次佳・最不適合的顏色，並以此為基準，針對拍婚紗照・婚禮當天・第二套禮服的禮服挑選、新郎禮服與領帶、皇冠・頭紗・珠寶・捧花・美甲、韓服，以及蜜月情侶裝提供建議。也會分享婚紗攝影・禮服・新秘方案比價等備婚訣竅。新郎＋新娘2人 110分鐘 ₩380,000，新娘1人 80分鐘 ₩270,000；只有新娘來，也會進行除新郎個人色彩診斷以外的所有內容。婚禮造型以新娘為基準，因此不提供新郎單獨諮詢。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "彩妝課程和諮詢是分開的嗎？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "是另外的課程，由美容系大學教授代表院長親自授課。先透過諮詢了解你的煩惱再上課，院長示範後馬上跟著練習，再示範、再練習，分段細緻地進行。與形象諮詢一起預約可享折扣，所以大多數人都會兩者一起報名。"
-      }
-    },
-    {
-      "@type": "Question",
       "name": "診斷前可以化妝嗎？",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -929,10 +676,59 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
         "@type": "Answer",
         "text": "地址為首爾市江西區 麻谷中央6路21號 711室（麻谷・金浦機場附近）。可在 Naver 地圖或 Google 地圖搜尋「당신을 그리다」。預約請透過 Instagram 私訊。營業時間平日 11:00–19:00，週末・國定假日 11:00–17:00，可能依代表院長的大學授課行程調整。"
       }
+    },
+    {
+      "@type": "Question",
+      "name": "可以用什麼語言溝通？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "可用簡單英文溝通，中文與日文可透過翻譯App協助。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "從金浦機場（GMP）怎麼去？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "約10分鐘！搭地鐵5號線到麻谷站，或搭9號線・機場鐵路（AREX）到麻谷渡口站，也可以搭計程車，很快就到。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "可以帶行李箱嗎？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "可以！當天能否寄放行李視預約狀況而定，請提前私訊確認。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "如何預約？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "採預約制。請透過 Instagram 私訊 @drawyourlife_official 預約（可用英文・日文）。也可使用 Naver 預約。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "付款方式和停車？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "可使用海外信用卡（Visa・Mastercard），設有停車場。"
+      }
     }
   ]
 }
 </script>
+      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">INTERNATIONAL</span>
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+      </div>
+      <div style="padding:26px 24px 34px;">
+        <h2 style="font-size:17px;font-weight:800;margin:0 0 14px;">海外旅客常見問題</h2>
+<div class="fq-wrap"><details class="fq-item"><summary>可以用什麼語言溝通？</summary><div class="fq-a"><div>可用簡單英文溝通，中文與日文可透過翻譯App協助。</div></div></details><details class="fq-item"><summary>從金浦機場（GMP）怎麼去？</summary><div class="fq-a"><div>約10分鐘！搭地鐵5號線到麻谷站，或搭9號線・機場鐵路（AREX）到麻谷渡口站，也可以搭計程車，很快就到。</div></div></details><details class="fq-item"><summary>可以帶行李箱嗎？</summary><div class="fq-a"><div>可以！當天能否寄放行李視預約狀況而定，請提前私訊確認。</div></div></details><details class="fq-item"><summary>如何預約？</summary><div class="fq-a"><div>採預約制。請透過 Instagram 私訊 <a href="https://www.instagram.com/drawyourlife_official/" target="_blank" rel="noopener" style="color:var(--acc)">@drawyourlife_official</a> 預約（可用英文・日文）。也可使用 Naver 預約。</div></div></details><details class="fq-item"><summary>付款方式和停車？</summary><div class="fq-a"><div>可使用海外信用卡（Visa・Mastercard），設有停車場。</div></div></details></div>
+      </div>
       <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
         <div style="flex:1;height:1px;background:var(--line);"></div>
         <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">BOOKING</span>
@@ -953,7 +749,7 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
           </div>
         <p style="font-size:11.5px;line-height:1.7;color:rgba(255,255,255,0.75);margin:16px 0 0;">在 Draw Your Life（당신을 그리다），由擁有美容藝術學學士・碩士・博士學位的美容系現任大學教授、2016年起研究個人色彩並撰寫KCI收錄論文的代表院長 Park Hyun-jeong 親自診斷。</p>
         <p style="font-size:11.5px;line-height:1.7;color:rgba(255,255,255,0.75);margin:12px 0 0;">地址：서울특별시 강서구 마곡중앙6로 21, 711호</p>
-        <a href="https://www.instagram.com/drawyourlife_official/" target="_blank" rel="noopener" style="display:block;text-align:center;margin-top:20px;background:#fff;color:var(--acc-dark);font-weight:800;padding:15px;border-radius:100px;font-size:15.5px;">Instagram 私訊預約・諮詢</a><p style="font-size:12px;line-height:1.7;color:rgba(255,255,255,0.9);margin:10px 0 0;text-align:center;">Instagram：@drawyourlife_official（歡迎使用中文詢問）</p>
+        <a href="https://www.instagram.com/drawyourlife_official/" target="_blank" rel="noopener" style="display:block;text-align:center;margin-top:20px;background:#fff;color:var(--acc-dark);font-weight:800;padding:15px;border-radius:100px;font-size:15.5px;">Instagram 私訊預約・諮詢</a><p style="font-size:12px;line-height:1.7;color:rgba(255,255,255,0.9);margin:10px 0 0;text-align:center;">Instagram：@drawyourlife_official（歡迎使用中文詢問）</p><a href="https://maps.app.goo.gl/EJWTYMtYBL8mupuXA" target="_blank" rel="noopener" style="display:block;text-align:center;margin-top:12px;border:1px solid rgba(255,255,255,0.6);color:#fff;font-weight:700;padding:12px;border-radius:100px;font-size:13.5px;">📍 在 Google 地圖查看</a>
         <a href="https://drbeautylab.co.kr/" target="_blank" style="display:block;text-align:center;margin-top:12px;color:rgba(255,255,255,0.85);font-size:12px;text-decoration:underline;">想了解我們的姊妹品牌——眉毛半永久專門店「Dr. Beauty Lab」嗎？→</a>
       </div></div>
 <script>
