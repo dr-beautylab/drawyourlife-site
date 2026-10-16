@@ -29,7 +29,152 @@
 }
 body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard',sans-serif;}
 .page{width:100%;max-width:430px;background:#FAF3F4;color:#2B2620;min-height:100vh;word-break:keep-all;overflow-wrap:break-word;}
-</style></head><body><div class="page">
+</style>
+<style>
+.pz-wrap{container-type:inline-size;
+    --bg:#FBEEEC; --ink:#2B2320; --soft:#7C7069; --rule:#2A2422;
+    --draw:#FBD9E2; --your:#E9EDFA; --life:#F2E4FB;
+    --draw-s:#FCE3E9; --your-s:#EFF2FD; --life-s:#F7ECFD;
+    --or:#EE5522;
+    --serif:'Noto Serif KR',serif; --body:Pretendard,'Gothic A1',sans-serif; --latin:Pretendard,'Gothic A1',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  .pz-wrap{background:#E9E4E1;font-family:var(--body);color:var(--ink);
+       word-break:keep-all}
+  .pz-card{width:100%;max-width:940px;background:var(--bg);padding:44px 40px 52px;
+        border-radius:12px;border:1px solid #EFE4E0}
+
+  .pz-brand{text-align:center;margin-bottom:38px}
+  .pz-brand h1{font-family:var(--serif);font-weight:400;font-size:clamp(23px,7.2cqw,54px);
+            letter-spacing:.16em;text-indent:.16em;line-height:1.25;white-space:nowrap}
+  .pz-brand p{font-family:var(--latin);font-size:clamp(9.5px,2.45cqw,17px);white-space:nowrap;
+           letter-spacing:.04em;color:#4A403C;margin-top:8px}
+
+  /* ---- 패키지 구성: LIFE ⊃ YOUR ⊃ DRAW ---- */
+  .pz-pkg{display:grid;grid-template-columns:68px 68px 68px 1fr;gap:0 14px;margin-bottom:34px}
+  .pz-rail{display:flex;flex-direction:column;align-items:center;justify-content:center;
+        text-align:center;padding:14px 4px;border-radius:2px}
+  .pz-rail b{font-family:var(--latin);font-size:15px;letter-spacing:.05em;font-weight:600}
+  .pz-rail span{font-size:9.5px;color:var(--soft);margin-top:5px;line-height:1.35}
+  .pz-r-life{background:var(--life);grid-column:1;grid-row:1/4}
+  .pz-r-your{background:var(--your);grid-column:2;grid-row:1/3}
+  .pz-r-draw{background:var(--draw);grid-column:3;grid-row:1/2}
+  .pz-cell{grid-column:4;padding:12px 0 18px}
+  .pz-cell + .pz-cell{border-top:1px solid #D9CFC9}
+  .pz-cell ul{list-style:none}
+  .pz-cell li{font-size:13.5px;line-height:1.85;color:#3A312D;text-align:center}
+
+  .pz-ab{display:grid;grid-template-columns:1fr 46px 1fr;gap:0 10px;align-items:start}
+  .pz-ab h4{font-size:14.5px;font-weight:700;text-align:center;margin-bottom:9px}
+  .pz-ab .pz-or{font-family:var(--latin);font-weight:600;color:var(--or);font-size:16px;
+          text-align:center;padding-top:1px}
+  .pz-ab li{text-align:center}
+  .pz-or-inline{font-family:var(--latin);font-weight:600;color:var(--or);font-size:0.92em;margin:0 3px}
+  /* 긴 항목이 문장 중간이나 괄호 안에서 잘리지 않도록 덩어리 단위로만 줄바꿈 */
+  .pz-cell .pz-nb{display:inline-block;white-space:nowrap}
+  .pz-opt-note{font-style:normal;color:var(--ink-soft)}
+
+  /* ---- 추가 옵션 ---- */
+  .pz-opt{margin:30px 0 34px}
+  .pz-opt h3{font-size:14.5px;font-weight:700;margin-bottom:14px}
+  .pz-opt-row{display:flex;justify-content:space-between;gap:24px;
+           padding:9px 0;font-size:13px;line-height:1.75;color:#3A312D}
+  .pz-opt-row + .pz-opt-row{border-top:1px dashed #DCD1CB}
+  .pz-opt-row .pz-price{white-space:nowrap;font-weight:700}
+  /* 옵션 항목이 문장 중간에서 잘리지 않도록 항목 단위로만 줄바꿈 */
+  .pz-opt-items span{display:inline-block;white-space:nowrap}
+  .pz-opt-items span:not(:last-child)::after{content:' / ';color:#A99C95;white-space:pre}
+  .pz-was{text-decoration:line-through;color:#9A8F89;font-weight:400}
+  .pz-now{color:#C0392B}
+  /* 1인/2인 금액을 열 단위로 세로 정렬 */
+  .pz-cls-price{display:grid;grid-template-columns:auto auto auto;
+             column-gap:12px;row-gap:5px;align-items:baseline;
+             font-variant-numeric:tabular-nums}
+  .pz-cls-price > span{text-align:right;white-space:nowrap}
+  .pz-cls-price > span:first-child,.pz-cls-price > span:nth-child(4){text-align:left;font-weight:400}
+
+  /* ---- 가격표 ---- */
+  .pz-wrap h2.pz-sec{font-family:var(--serif);font-size:19px;font-weight:600;margin:0 0 14px;
+         letter-spacing:.04em}
+  /* 표 아래선은 table 자체에 걸어야 rowspan 칸(LIFE·입시반) 밑까지 이어집니다 */
+  .pz-wrap table{width:100%;border-collapse:collapse;margin-bottom:30px;
+        border-bottom:1.5px solid var(--rule)}
+  .pz-wrap thead th{font-size:13.5px;font-weight:700;padding:13px 8px;
+           border-top:1.5px solid var(--rule);border-bottom:1.5px solid var(--rule)}
+  .pz-wrap tbody td{padding:9px 8px;font-size:13.5px;text-align:center;color:#3A312D}
+  .pz-grp{font-family:var(--latin);font-weight:600;font-size:15.5px;letter-spacing:.04em}
+  .pz-grp small{display:block;font-family:var(--body);font-size:9.5px;font-weight:400;
+             color:var(--soft);margin-top:4px;line-height:1.4}
+  .pz-g-draw td{background:var(--draw-s)}
+  .pz-g-your td{background:var(--your-s)}
+  .pz-g-life td{background:var(--life-s)}
+  .pz-g-wd td{background:#FBE9EE}
+  tbody tr.pz-grp-start td{border-top:1px solid var(--rule)}
+  .pz-g-draw td:first-child,.pz-g-your td:first-child,.pz-g-life td:first-child{vertical-align:middle}
+  .pz-won{font-variant-numeric:tabular-nums}
+  .pz-note{font-size:12px;color:var(--soft);line-height:1.7;margin-top:-16px;margin-bottom:30px}
+  /* 표 아래가 아니라 구성도 바로 밑에 놓이는 주석 */
+  .pz-note-top{margin:-14px 0 30px;padding-top:14px;border-top:1px solid #E5DAD4}
+
+  /* ---- 모바일 ---- */
+  @container (max-width:470px){
+    .pz-card{padding:30px 12px 40px}
+    /* DRAW ⊂ YOUR ⊂ LIFE 포함 관계는 좁은 화면에서도 그대로 유지.
+       라벨은 가로쓰기 그대로 두고(가독성), 레일 폭만 줄인다. */
+    .pz-pkg{grid-template-columns:44px 44px 44px 1fr;gap:0 6px}
+    .pz-rail{padding:10px 2px}
+    .pz-rail b{font-size:11.5px;letter-spacing:.02em}
+    .pz-rail span{font-size:8px;margin-top:4px;line-height:1.3;letter-spacing:-.01em}
+    .pz-cell{padding:10px 0 14px}
+    .pz-ab{grid-template-columns:1fr;gap:14px}
+    .pz-ab .pz-or{padding:2px 0}
+    .pz-opt-row{flex-direction:column;gap:4px}
+    .pz-opt-row .pz-price{align-self:flex-end}
+    /* 가격표는 좁은 화면에서도 표 형태를 유지한다.
+       행을 카드로 쪼개면 인원·시간·가격을 한눈에 비교할 수 없기 때문. */
+    .pz-wrap thead th{padding:10px 2px;font-size:11.5px}
+    .pz-wrap tbody td{padding:7px 2px;font-size:11.5px}
+    .pz-grp{font-size:13px}
+    .pz-grp small{font-size:8px;margin-top:3px;line-height:1.35}
+    .pz-wrap h2.pz-sec{font-size:17px}
+    .pz-note{font-size:11px}
+  }
+</style>
+<style>
+.fq-wrap{font-family:inherit;color:var(--ink)}
+/* 아코디언이지만 답변 텍스트는 접힌 상태에서도 HTML 소스에 그대로 있습니다.
+   사람 눈에는 짧게, 크롤러에는 전부 보이게 하려는 구조입니다. */
+.fq-item{border-bottom:1px solid var(--line)}
+.fq-item:first-child{border-top:1px solid var(--line)}
+.fq-item summary{list-style:none;cursor:pointer;display:flex;align-items:flex-start;gap:10px;
+                 padding:15px 2px;font-size:13.5px;font-weight:700;line-height:1.55}
+.fq-item summary::-webkit-details-marker{display:none}
+.fq-item summary::before{content:'Q';flex-shrink:0;color:var(--acc);font-weight:800;font-size:13px;
+                         line-height:1.55}
+.fq-item summary::after{content:'';flex-shrink:0;margin-left:auto;width:7px;height:7px;margin-top:5px;
+                        border-right:1.6px solid #B7ADA6;border-bottom:1.6px solid #B7ADA6;
+                        transform:rotate(45deg);transition:transform .18s}
+.fq-item[open] summary::after{transform:rotate(-135deg);margin-top:8px}
+.fq-a{display:flex;gap:10px;padding:0 2px 16px;font-size:13px;line-height:1.85;color:#5E554E}
+.fq-a::before{content:'A';flex-shrink:0;color:#B7ADA6;font-weight:800;font-size:13px}
+.fq-a b{color:var(--ink);font-weight:700}
+</style>
+<style>
+/* ---- 상단 서비스 탭 ---- */
+.tb-bar{position:sticky;top:0;z-index:20;background:rgba(250,243,244,.96);
+        backdrop-filter:saturate(1.2) blur(6px);-webkit-backdrop-filter:saturate(1.2) blur(6px);
+        padding:10px 16px;border-bottom:1px solid var(--line)}
+.tb-list{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;
+         background:#fff;border:1px solid var(--line);border-radius:100px}
+.tb-btn{appearance:none;border:0;background:transparent;font-family:inherit;cursor:pointer;
+        font-size:13px;font-weight:700;color:var(--ink-soft);padding:10px 4px;border-radius:100px;
+        white-space:nowrap;letter-spacing:-.01em;transition:background .15s,color .15s}
+.tb-btn[aria-selected="true"]{background:var(--acc);color:#fff}
+.tb-panel{scroll-margin-top:68px}
+.tb-panel[hidden]{display:none}
+@media (max-width:360px){.tb-btn{font-size:12px}}
+</style>
+</head><body><div class="page">
       <div style="padding:44px 24px 34px;">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:22px;">
           <span style="font-size:11px;font-weight:800;border:1px solid var(--acc);color:var(--acc);padding:3px 9px;border-radius:100px;">PREMIUM IMAGE CONSULTING</span>
@@ -55,8 +200,14 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
           </div>
         </div>
         <a href="https://naver.me/5KbMRm0w" style="display:inline-block;background:var(--acc);color:#fff;font-weight:700;font-size:13.5px;padding:13px 22px;border-radius:100px;">네이버 예약하기</a>
-        <a href="/wedding/" style="display:inline-block;margin-left:6px;border:1px solid var(--acc);color:var(--acc);background:#fff;font-weight:700;font-size:13.5px;padding:12px 18px;border-radius:100px;">웨딩 컨설팅 보기</a>
       </div>
+      <nav class="tb-bar" aria-label="서비스 선택">
+        <div class="tb-list" role="tablist">
+          <button class="tb-btn" role="tab" id="tab-image" aria-controls="image" aria-selected="true">이미지 컨설팅</button>
+          <button class="tb-btn" role="tab" id="tab-wedding" aria-controls="wedding" aria-selected="false" tabindex="-1">웨딩 컨설팅</button>
+          <button class="tb-btn" role="tab" id="tab-makeup" aria-controls="makeup" aria-selected="false" tabindex="-1">메이크업 컨설팅</button>
+        </div>
+      </nav>
       <div style="padding:36px 24px;">
         <div style="display:flex;gap:16px;align-items:center;margin-bottom:18px;">
           <img src="data:image/webp;base64,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" style="width:76px;height:76px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--acc);" />
@@ -226,140 +377,15 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
           </div>
         </div>
       </div>
-      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">WEDDING</span>
-        <div style="flex:1;height:1px;background:var(--line);"></div>
-      </div>
-      <div style="padding:26px 24px 30px;">
-        <a href="/wedding/" style="display:block;text-decoration:none;color:inherit;background:#FFFFFF;border:1px solid var(--line);border-radius:16px;padding:22px 20px;">
-          <div style="font-size:11.5px;letter-spacing:0.08em;color:var(--acc);margin-bottom:8px;">WEDDING CONSULTING</div>
-          <div style="font-size:17px;font-weight:800;line-height:1.5;margin-bottom:8px;">결혼 준비 중이라면,<br>드레스 투어 전에 내 컬러부터</div>
-          <div style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);margin-bottom:16px;">퍼스널컬러 진단 + 웨딩 컨설팅을 한 번에. 2부 드레스, 신랑 예복, 티아라·부케·쥬얼리, 스드메 견적 비교 노하우까지 유부선배가 함께 준비해드려요.</div>
-          <span style="display:inline-block;background:var(--acc);color:#fff;font-weight:700;font-size:13px;padding:11px 18px;border-radius:100px;">웨딩 컨설팅 자세히 보기 →</span>
-        </a>
-      </div>
+      <section class="tb-panel" id="image" role="tabpanel" aria-labelledby="tab-image">
       <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
         <div style="flex:1;height:1px;background:var(--line);"></div>
         <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">PRICE</span>
         <div style="flex:1;height:1px;background:var(--line);"></div>
       </div>
       <div style="padding:24px 24px 30px;">
-<!-- 가격 안내 — HTML 섹션 (pz- 접두어로 기존 CSS와 격리) -->
-<style>
-.pz-wrap{container-type:inline-size;
-    --bg:#FBEEEC; --ink:#2B2320; --soft:#7C7069; --rule:#2A2422;
-    --draw:#FBD9E2; --your:#E9EDFA; --life:#F2E4FB;
-    --draw-s:#FCE3E9; --your-s:#EFF2FD; --life-s:#F7ECFD;
-    --or:#EE5522;
-    --serif:'Noto Serif KR',serif; --body:Pretendard,'Gothic A1',sans-serif; --latin:Pretendard,'Gothic A1',sans-serif;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  .pz-wrap{background:#E9E4E1;font-family:var(--body);color:var(--ink);
-       word-break:keep-all}
-  .pz-card{width:100%;max-width:940px;background:var(--bg);padding:44px 40px 52px;
-        border-radius:12px;border:1px solid #EFE4E0}
-
-  .pz-brand{text-align:center;margin-bottom:38px}
-  .pz-brand h1{font-family:var(--serif);font-weight:400;font-size:clamp(23px,7.2cqw,54px);
-            letter-spacing:.16em;text-indent:.16em;line-height:1.25;white-space:nowrap}
-  .pz-brand p{font-family:var(--latin);font-size:clamp(9.5px,2.45cqw,17px);white-space:nowrap;
-           letter-spacing:.04em;color:#4A403C;margin-top:8px}
-
-  /* ---- 패키지 구성: LIFE ⊃ YOUR ⊃ DRAW ---- */
-  .pz-pkg{display:grid;grid-template-columns:68px 68px 68px 1fr;gap:0 14px;margin-bottom:34px}
-  .pz-rail{display:flex;flex-direction:column;align-items:center;justify-content:center;
-        text-align:center;padding:14px 4px;border-radius:2px}
-  .pz-rail b{font-family:var(--latin);font-size:15px;letter-spacing:.05em;font-weight:600}
-  .pz-rail span{font-size:9.5px;color:var(--soft);margin-top:5px;line-height:1.35}
-  .pz-r-life{background:var(--life);grid-column:1;grid-row:1/4}
-  .pz-r-your{background:var(--your);grid-column:2;grid-row:1/3}
-  .pz-r-draw{background:var(--draw);grid-column:3;grid-row:1/2}
-  .pz-cell{grid-column:4;padding:12px 0 18px}
-  .pz-cell + .pz-cell{border-top:1px solid #D9CFC9}
-  .pz-cell ul{list-style:none}
-  .pz-cell li{font-size:13.5px;line-height:1.85;color:#3A312D;text-align:center}
-
-  .pz-ab{display:grid;grid-template-columns:1fr 46px 1fr;gap:0 10px;align-items:start}
-  .pz-ab h4{font-size:14.5px;font-weight:700;text-align:center;margin-bottom:9px}
-  .pz-ab .pz-or{font-family:var(--latin);font-weight:600;color:var(--or);font-size:16px;
-          text-align:center;padding-top:1px}
-  .pz-ab li{text-align:center}
-  .pz-or-inline{font-family:var(--latin);font-weight:600;color:var(--or);font-size:0.92em;margin:0 3px}
-  /* 긴 항목이 문장 중간이나 괄호 안에서 잘리지 않도록 덩어리 단위로만 줄바꿈 */
-  .pz-cell .pz-nb{display:inline-block;white-space:nowrap}
-  .pz-opt-note{font-style:normal;color:var(--ink-soft)}
-
-  /* ---- 추가 옵션 ---- */
-  .pz-opt{margin:30px 0 34px}
-  .pz-opt h3{font-size:14.5px;font-weight:700;margin-bottom:14px}
-  .pz-opt-row{display:flex;justify-content:space-between;gap:24px;
-           padding:9px 0;font-size:13px;line-height:1.75;color:#3A312D}
-  .pz-opt-row + .pz-opt-row{border-top:1px dashed #DCD1CB}
-  .pz-opt-row .pz-price{white-space:nowrap;font-weight:700}
-  /* 옵션 항목이 문장 중간에서 잘리지 않도록 항목 단위로만 줄바꿈 */
-  .pz-opt-items span{display:inline-block;white-space:nowrap}
-  .pz-opt-items span:not(:last-child)::after{content:' / ';color:#A99C95;white-space:pre}
-  .pz-was{text-decoration:line-through;color:#9A8F89;font-weight:400}
-  .pz-now{color:#C0392B}
-  /* 1인/2인 금액을 열 단위로 세로 정렬 */
-  .pz-cls-price{display:grid;grid-template-columns:auto auto auto;
-             column-gap:12px;row-gap:5px;align-items:baseline;
-             font-variant-numeric:tabular-nums}
-  .pz-cls-price > span{text-align:right;white-space:nowrap}
-  .pz-cls-price > span:first-child,.pz-cls-price > span:nth-child(4){text-align:left;font-weight:400}
-
-  /* ---- 가격표 ---- */
-  .pz-wrap h2.pz-sec{font-family:var(--serif);font-size:19px;font-weight:600;margin:0 0 14px;
-         letter-spacing:.04em}
-  /* 표 아래선은 table 자체에 걸어야 rowspan 칸(LIFE·입시반) 밑까지 이어집니다 */
-  .pz-wrap table{width:100%;border-collapse:collapse;margin-bottom:30px;
-        border-bottom:1.5px solid var(--rule)}
-  .pz-wrap thead th{font-size:13.5px;font-weight:700;padding:13px 8px;
-           border-top:1.5px solid var(--rule);border-bottom:1.5px solid var(--rule)}
-  .pz-wrap tbody td{padding:9px 8px;font-size:13.5px;text-align:center;color:#3A312D}
-  .pz-grp{font-family:var(--latin);font-weight:600;font-size:15.5px;letter-spacing:.04em}
-  .pz-grp small{display:block;font-family:var(--body);font-size:9.5px;font-weight:400;
-             color:var(--soft);margin-top:4px;line-height:1.4}
-  .pz-g-draw td{background:var(--draw-s)}
-  .pz-g-your td{background:var(--your-s)}
-  .pz-g-life td{background:var(--life-s)}
-  .pz-g-wd td{background:#FBE9EE}
-  tbody tr.pz-grp-start td{border-top:1px solid var(--rule)}
-  .pz-g-draw td:first-child,.pz-g-your td:first-child,.pz-g-life td:first-child{vertical-align:middle}
-  .pz-won{font-variant-numeric:tabular-nums}
-  .pz-note{font-size:12px;color:var(--soft);line-height:1.7;margin-top:-16px;margin-bottom:30px}
-  /* 표 아래가 아니라 구성도 바로 밑에 놓이는 주석 */
-  .pz-note-top{margin:-14px 0 30px;padding-top:14px;border-top:1px solid #E5DAD4}
-
-  /* ---- 모바일 ---- */
-  @container (max-width:470px){
-    .pz-card{padding:30px 12px 40px}
-    /* DRAW ⊂ YOUR ⊂ LIFE 포함 관계는 좁은 화면에서도 그대로 유지.
-       라벨은 가로쓰기 그대로 두고(가독성), 레일 폭만 줄인다. */
-    .pz-pkg{grid-template-columns:44px 44px 44px 1fr;gap:0 6px}
-    .pz-rail{padding:10px 2px}
-    .pz-rail b{font-size:11.5px;letter-spacing:.02em}
-    .pz-rail span{font-size:8px;margin-top:4px;line-height:1.3;letter-spacing:-.01em}
-    .pz-cell{padding:10px 0 14px}
-    .pz-ab{grid-template-columns:1fr;gap:14px}
-    .pz-ab .pz-or{padding:2px 0}
-    .pz-opt-row{flex-direction:column;gap:4px}
-    .pz-opt-row .pz-price{align-self:flex-end}
-    /* 가격표는 좁은 화면에서도 표 형태를 유지한다.
-       행을 카드로 쪼개면 인원·시간·가격을 한눈에 비교할 수 없기 때문. */
-    .pz-wrap thead th{padding:10px 2px;font-size:11.5px}
-    .pz-wrap tbody td{padding:7px 2px;font-size:11.5px}
-    .pz-grp{font-size:13px}
-    .pz-grp small{font-size:8px;margin-top:3px;line-height:1.35}
-    .pz-wrap h2.pz-sec{font-size:17px}
-    .pz-note{font-size:11px}
-  }
-</style>
-
 <div class="pz-wrap">
 <div class="pz-card">
-
   <div class="pz-brand">
     <h1>당신을 그리다</h1>
     <p>Personal Color &amp; Image Consulting Center</p>
@@ -455,7 +481,40 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
     </tbody>
   </table>
   <p class="pz-note">※ 4인 이상 기업·단체 예약 및 미디어 협업은 별도 문의 바랍니다.</p>
-
+</div>
+</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">FAQ</span>
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+      </div>
+      <div style="padding:26px 24px 34px;">
+<div class="fq-wrap"><details class="fq-item"><summary>DRAW · YOUR · LIFE는 어떻게 다른가요?</summary><div class="fq-a"><div>뒤로 갈수록 앞 과정을 포함하는 구조입니다. <b>DRAW</b>는 12계절 드레이핑 진단과 색조 제품·립 컬러 추천, 진단결과지와 컬러 카드까지. <b>YOUR</b>는 여기에 패션 스타일링·쥬얼리, 헤어·아이브로우·네일 디자인, 렌즈·안경 디자인, 향수 추천과 메이크업 파우치 진단이 더해집니다. <b>LIFE</b>는 얼굴 골격과 체형 골격 AI 정밀 분석, 메이크업 코칭과 패션 스타일링 코칭까지 포함한 토탈 과정입니다.</div></div></details><details class="fq-item"><summary>퍼스널컬러 진단, 시간과 가격은 어떻게 되나요?</summary><div class="fq-a"><div>1인 기준 DRAW 40분 11만원, YOUR 80분 20만원, LIFE 110분 30만원입니다. 인원이 늘수록 1인당 금액이 내려가서 DRAW 3인은 1인 8.5만원입니다. 4인 이상 기업·단체 예약은 별도 문의 주세요. 인원별 표는 위 가격 안내에 정리해두었습니다.</div></div></details><details class="fq-item"><summary>2인 이상 함께 예약하면 어떻게 진행되나요?</summary><div class="fq-a"><div>같은 시간에 함께 진행되며 인원이 늘수록 1인당 금액이 내려갑니다. DRAW·YOUR·LIFE 모두 최대 3인까지 예약하실 수 있고, 4인 이상 기업·단체 예약은 별도 문의 주세요.</div></div></details><details class="fq-item"><summary>진단 결과는 어떤 형태로 받나요?</summary><div class="fq-a"><div>자체 제작 진단 결과지와 쇼핑할 때 들고 다닐 수 있는 컬러 카드를 드립니다. YOUR는 톤별 맞춤 가이드가, LIFE는 이미지메이킹 토탈 가이드가 추가됩니다.</div></div></details></div>
+      </div>
+      </section>
+      <section class="tb-panel" id="wedding" role="tabpanel" aria-labelledby="tab-wedding" hidden>
+      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">WEDDING</span>
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+      </div>
+      <div style="padding:26px 24px 30px;">
+        <a href="/wedding/" style="display:block;text-decoration:none;color:inherit;background:#FFFFFF;border:1px solid var(--line);border-radius:16px;padding:22px 20px;">
+          <div style="font-size:11.5px;letter-spacing:0.08em;color:var(--acc);margin-bottom:8px;">WEDDING CONSULTING</div>
+          <div style="font-size:17px;font-weight:800;line-height:1.5;margin-bottom:8px;">결혼 준비 중이라면,<br>드레스 투어 전에 내 컬러부터</div>
+          <div style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);margin-bottom:16px;">퍼스널컬러 진단 + 웨딩 컨설팅을 한 번에. 2부 드레스, 신랑 예복, 티아라·부케·쥬얼리, 스드메 견적 비교 노하우까지 유부선배가 함께 준비해드려요.</div>
+          <span style="display:inline-block;background:var(--acc);color:#fff;font-weight:700;font-size:13px;padding:11px 18px;border-radius:100px;">웨딩 컨설팅 자세히 보기 →</span>
+        </a>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">PRICE</span>
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+      </div>
+      <div style="padding:24px 24px 30px;">
+<div class="pz-wrap">
+<div class="pz-card">
   <!-- 웨딩 -->
   <h2 class="pz-sec">웨딩 컨설팅</h2>
   <table>
@@ -471,7 +530,40 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
     </tbody>
   </table>
   <p class="pz-note">※ 신부님 1인 컨설팅은 가능하지만, 신랑님 1인 컨설팅은 진행하지 않습니다. <a href="/wedding/" style="color:inherit;white-space:nowrap">자세히 보기 →</a></p>
-
+</div>
+</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">FAQ</span>
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+      </div>
+      <div style="padding:26px 24px 34px;">
+<div class="fq-wrap"><details class="fq-item"><summary>웨딩 컨설팅은 어떻게 진행되나요?</summary><div class="fq-a"><div>퍼스널컬러 진단과 웨딩 컨설팅을 한 번에 진행합니다. 드레이핑 진단으로 베스트·세컨드·워스트 컬러를 찾고, 그 결과를 기준으로 촬영·본식·2부 드레스, 신랑 예복과 넥타이, 티아라·베일·쥬얼리·부케·네일, 한복, 허니문 커플룩까지 컨설팅합니다. 스드메 견적 비교 등 웨딩 준비 노하우도 함께 알려드립니다. 신랑+신부 2인 110분 38만원, 신부 1인 80분 27만원이며, 신부만 오셔도 신랑님 퍼스널컬러 진단을 제외한 나머지는 모두 진행됩니다. 웨딩 스타일링은 신부님을 기준으로 정해지기 때문에 신랑님 1인 컨설팅은 진행하지 않습니다. <a href="/wedding/" style="color:var(--acc)">웨딩 컨설팅 자세히 보기</a></div></div></details></div>
+      </div>
+      </section>
+      <section class="tb-panel" id="makeup" role="tabpanel" aria-labelledby="tab-makeup" hidden>
+      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">MAKEUP</span>
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+      </div>
+      <div style="padding:26px 24px 30px;">
+        <div style="background:#FFFFFF;border:1px solid var(--line);border-radius:16px;padding:22px 20px;">
+          <div style="font-size:11.5px;letter-spacing:0.08em;color:var(--acc);margin-bottom:8px;">MAKEUP CLASS</div>
+          <div style="font-size:17px;font-weight:800;line-height:1.5;margin-bottom:8px;">뷰티전공 대학교수 대표원장 직강<br>메이크업 클래스</div>
+          <div style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);margin-bottom:16px;">상담으로 고민을 먼저 파악한 뒤 수업해요. 원장이 시연하면 바로 따라 실습하고, 다시 시연하고 실습하는 식으로 구간을 나눠 디테일하게 진도를 나갑니다.</div>
+          <a href="https://naver.me/5KbMRm0w" style="display:inline-block;background:var(--acc);color:#fff;font-weight:700;font-size:13px;padding:11px 18px;border-radius:100px;">네이버 예약하기 →</a>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">PRICE</span>
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+      </div>
+      <div style="padding:24px 24px 30px;">
+<div class="pz-wrap">
+<div class="pz-card">
   <!-- 메이크업 클래스 -->
   <h2 class="pz-sec">메이크업 클래스</h2>
   <table>
@@ -497,8 +589,28 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
   </table>
   <p class="pz-note">※ 3Day 클래스의 소요시간은 <strong>1회당</strong> 시간입니다. (1Day 과정 × 3회)</p>
 
+  <div class="pz-opt" style="margin-top:0">
+    <h3>* 이미지 컨설팅과 함께 예약 시</h3>
+    <div class="pz-opt-row">
+      <div>뷰티전공 대학교수 대표원장 직강 <strong>‘메이크업 클래스’</strong></div>
+      <div class="pz-price pz-cls-price">
+        <span>1인 (80분)</span><span class="pz-was">180,000원</span><span class="pz-now">160,000원</span>
+        <span>2인 (110분)</span><span class="pz-was">320,000원</span><span class="pz-now">290,000원</span>
+      </div>
+    </div>
+  </div>
 </div>
 </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">FAQ</span>
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+      </div>
+      <div style="padding:26px 24px 34px;">
+<div class="fq-wrap"><details class="fq-item"><summary>메이크업 클래스는 컨설팅과 별개인가요?</summary><div class="fq-a"><div>별도 과정이며 뷰티전공 대학교수인 대표원장이 직접 진행합니다. 상담으로 고민을 먼저 파악한 뒤 수업하는데, 원장이 시연하면 바로 따라 실습하고 다시 시연하고 실습하는 식으로 구간을 나눠 디테일하게 진도를 나갑니다. 이미지 컨설팅과 함께 예약하시면 할인이 적용돼 두 가지를 같이 신청하시는 분이 가장 많습니다.</div></div></details></div>
+      </div>
+      </section>
 
 <script type="application/ld+json">
 {
@@ -666,36 +778,14 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
   "hasMap": "https://map.naver.com/p/search/서울%20강서구%20마곡중앙6로%2021,%20711호"
 }
 </script>
-
-</div>
-      
       <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
         <div style="flex:1;height:1px;background:var(--line);"></div>
         <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">FAQ</span>
         <div style="flex:1;height:1px;background:var(--line);"></div>
       </div>
       <div style="padding:26px 24px 34px;">
-<style>
-.fq-wrap{font-family:inherit;color:var(--ink)}
-/* 아코디언이지만 답변 텍스트는 접힌 상태에서도 HTML 소스에 그대로 있습니다.
-   사람 눈에는 짧게, 크롤러에는 전부 보이게 하려는 구조입니다. */
-.fq-item{border-bottom:1px solid var(--line)}
-.fq-item:first-child{border-top:1px solid var(--line)}
-.fq-item summary{list-style:none;cursor:pointer;display:flex;align-items:flex-start;gap:10px;
-                 padding:15px 2px;font-size:13.5px;font-weight:700;line-height:1.55}
-.fq-item summary::-webkit-details-marker{display:none}
-.fq-item summary::before{content:'Q';flex-shrink:0;color:var(--acc);font-weight:800;font-size:13px;
-                         line-height:1.55}
-.fq-item summary::after{content:'';flex-shrink:0;margin-left:auto;width:7px;height:7px;margin-top:5px;
-                        border-right:1.6px solid #B7ADA6;border-bottom:1.6px solid #B7ADA6;
-                        transform:rotate(45deg);transition:transform .18s}
-.fq-item[open] summary::after{transform:rotate(-135deg);margin-top:8px}
-.fq-a{display:flex;gap:10px;padding:0 2px 16px;font-size:13px;line-height:1.85;color:#5E554E}
-.fq-a::before{content:'A';flex-shrink:0;color:#B7ADA6;font-weight:800;font-size:13px}
-.fq-a b{color:var(--ink);font-weight:700}
-</style>
-<div class="fq-wrap"><details class="fq-item"><summary>DRAW · YOUR · LIFE는 어떻게 다른가요?</summary><div class="fq-a"><div>뒤로 갈수록 앞 과정을 포함하는 구조입니다. <b>DRAW</b>는 12계절 드레이핑 진단과 색조 제품·립 컬러 추천, 진단결과지와 컬러 카드까지. <b>YOUR</b>는 여기에 패션 스타일링·쥬얼리, 헤어·아이브로우·네일 디자인, 렌즈·안경 디자인, 향수 추천과 메이크업 파우치 진단이 더해집니다. <b>LIFE</b>는 얼굴 골격과 체형 골격 AI 정밀 분석, 메이크업 코칭과 패션 스타일링 코칭까지 포함한 토탈 과정입니다.</div></div></details><details class="fq-item"><summary>퍼스널컬러 진단, 시간과 가격은 어떻게 되나요?</summary><div class="fq-a"><div>1인 기준 DRAW 40분 11만원, YOUR 80분 20만원, LIFE 110분 30만원입니다. 인원이 늘수록 1인당 금액이 내려가서 DRAW 3인은 1인 8.5만원입니다. 4인 이상 기업·단체 예약은 별도 문의 주세요. 인원별 표는 위 가격 안내에 정리해두었습니다.</div></div></details><details class="fq-item"><summary>2인 이상 함께 예약하면 어떻게 진행되나요?</summary><div class="fq-a"><div>같은 시간에 함께 진행되며 인원이 늘수록 1인당 금액이 내려갑니다. DRAW·YOUR·LIFE 모두 최대 3인까지 예약하실 수 있고, 4인 이상 기업·단체 예약은 별도 문의 주세요.</div></div></details><details class="fq-item"><summary>진단 전에 화장을 하고 가도 되나요?</summary><div class="fq-a"><div>정확한 진단을 위해 <b>노메이크업</b>으로 방문해 주셔야 합니다. 피부톤을 커버하는 톤업 선크림도 바르지 말아 주세요. 매장에서 화장을 지우실 경우 그 시간이 컨설팅 시간에 포함되니, 미리 지우고 오시면 진단에 온전히 쓰실 수 있습니다.</div></div></details><details class="fq-item"><summary>진단 결과는 어떤 형태로 받나요?</summary><div class="fq-a"><div>자체 제작 진단 결과지와 쇼핑할 때 들고 다닐 수 있는 컬러 카드를 드립니다. YOUR는 톤별 맞춤 가이드가, LIFE는 이미지메이킹 토탈 가이드가 추가됩니다.</div></div></details><details class="fq-item"><summary>웨딩 컨설팅은 어떻게 진행되나요?</summary><div class="fq-a"><div>퍼스널컬러 진단과 웨딩 컨설팅을 한 번에 진행합니다. 드레이핑 진단으로 베스트·세컨드·워스트 컬러를 찾고, 그 결과를 기준으로 촬영·본식·2부 드레스, 신랑 예복과 넥타이, 티아라·베일·쥬얼리·부케·네일, 한복, 허니문 커플룩까지 컨설팅합니다. 스드메 견적 비교 등 웨딩 준비 노하우도 함께 알려드립니다. 신랑+신부 2인 110분 38만원, 신부 1인 80분 27만원이며, 신부만 오셔도 신랑님 퍼스널컬러 진단을 제외한 나머지는 모두 진행됩니다. 웨딩 스타일링은 신부님을 기준으로 정해지기 때문에 신랑님 1인 컨설팅은 진행하지 않습니다. <a href="/wedding/" style="color:var(--acc)">웨딩 컨설팅 자세히 보기</a></div></div></details><details class="fq-item"><summary>메이크업 클래스는 컨설팅과 별개인가요?</summary><div class="fq-a"><div>별도 과정이며 뷰티전공 대학교수인 대표원장이 직접 진행합니다. 상담으로 고민을 먼저 파악한 뒤 수업하는데, 원장이 시연하면 바로 따라 실습하고 다시 시연하고 실습하는 식으로 구간을 나눠 디테일하게 진도를 나갑니다. 이미지 컨설팅과 함께 예약하시면 할인이 적용돼 두 가지를 같이 신청하시는 분이 가장 많습니다.</div></div></details><details class="fq-item"><summary>퍼스널컬러 진단, 누구에게 받는 게 좋을까요?</summary><div class="fq-a"><div>미용예술학 박사이자 뷰티전공 대학교수이며, 메이크업 박사·헤어 석사 학위를 함께 보유하고 있습니다. 퍼스널컬러·화장품 관련 학술 논문을 다수 집필했고 KCI 등재 논문도 포함되어 있습니다. 2016년부터 진단을 시작해 누적 2만 건이 넘습니다.</div></div></details><details class="fq-item"><summary>강서구 마곡 어디에 있나요? 예약은 어떻게 하나요?</summary><div class="fq-a"><div>서울 강서구 마곡중앙6로 21, 711호입니다. 네이버 예약으로 접수하며 평일 11:00~19:00, 주말·공휴일 11:00~17:00 운영합니다. 대표원장 대학 강의 일정에 따라 변동될 수 있습니다.</div></div></details></div>
-</div>
+<div class="fq-wrap"><details class="fq-item"><summary>진단 전에 화장을 하고 가도 되나요?</summary><div class="fq-a"><div>정확한 진단을 위해 <b>노메이크업</b>으로 방문해 주셔야 합니다. 피부톤을 커버하는 톤업 선크림도 바르지 말아 주세요. 매장에서 화장을 지우실 경우 그 시간이 컨설팅 시간에 포함되니, 미리 지우고 오시면 진단에 온전히 쓰실 수 있습니다.</div></div></details><details class="fq-item"><summary>퍼스널컬러 진단, 누구에게 받는 게 좋을까요?</summary><div class="fq-a"><div>미용예술학 박사이자 뷰티전공 대학교수이며, 메이크업 박사·헤어 석사 학위를 함께 보유하고 있습니다. 퍼스널컬러·화장품 관련 학술 논문을 다수 집필했고 KCI 등재 논문도 포함되어 있습니다. 2016년부터 진단을 시작해 누적 2만 건이 넘습니다.</div></div></details><details class="fq-item"><summary>강서구 마곡 어디에 있나요? 예약은 어떻게 하나요?</summary><div class="fq-a"><div>서울 강서구 마곡중앙6로 21, 711호입니다. 네이버 예약으로 접수하며 평일 11:00~19:00, 주말·공휴일 11:00~17:00 운영합니다. 대표원장 대학 강의 일정에 따라 변동될 수 있습니다.</div></div></details></div>
+      </div>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -797,4 +887,40 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
         <p style="font-size:11.5px;line-height:1.7;color:rgba(255,255,255,0.75);margin:16px 0 0;">당신을 그리다는 미용예술학 학사·석사·박사 학위를 모두 보유한 뷰티전공 현직 대학교수, 2016년~ 퍼스널컬러 연구 및 KCI 등재 논문 저자인 대표원장 박현정이 직접 진단합니다.</p>
         <a href="https://naver.me/5KbMRm0w" style="display:block;text-align:center;margin-top:20px;background:#fff;color:var(--acc-dark);font-weight:800;padding:15px;border-radius:100px;font-size:15.5px;">네이버 예약하기</a>
         <a href="https://drbeautylab.co.kr/" target="_blank" style="display:block;text-align:center;margin-top:12px;color:rgba(255,255,255,0.85);font-size:12px;text-decoration:underline;">당신을 그리다의 세컨드 브랜드, 눈썹 아트메이크업 전문 '닥터뷰티랩'이 궁금하다면 →</a>
-      </div><a href="/blog/" style="display:block;text-align:center;padding:18px;font-size:12px;color:#847C71;text-decoration:underline;">📝 블로그에서 더 알아보기</a></div></body></html>
+      </div><a href="/blog/" style="display:block;text-align:center;padding:18px;font-size:12px;color:#847C71;text-decoration:underline;">📝 블로그에서 더 알아보기</a></div>
+<script>
+(function(){
+  var btns=[].slice.call(document.querySelectorAll('.tb-btn'));
+  function show(id,scroll){
+    var found=false;
+    btns.forEach(function(b){
+      var on=b.getAttribute('aria-controls')===id; if(on)found=true;
+      b.setAttribute('aria-selected',on?'true':'false'); b.tabIndex=on?0:-1;
+      var p=document.getElementById(b.getAttribute('aria-controls')); if(p)p.hidden=!on;
+    });
+    if(!found)return false;
+    if(scroll){var p=document.getElementById(id); if(p)p.scrollIntoView({behavior:'smooth',block:'start'});}
+    return true;
+  }
+  btns.forEach(function(b,i){
+    b.addEventListener('click',function(){
+      var id=b.getAttribute('aria-controls');
+      show(id,true);
+      try{history.replaceState(null,'','#'+id);}catch(e){}
+    });
+    b.addEventListener('keydown',function(e){
+      if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft')return;
+      var n=btns[(i+(e.key==='ArrowRight'?1:btns.length-1))%btns.length];
+      n.focus(); n.click();
+    });
+  });
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[data-tab]'); if(!a)return;
+    e.preventDefault(); var id=a.getAttribute('data-tab'); show(id,true);
+    try{history.replaceState(null,'','#'+id);}catch(e2){}
+  });
+  var h=(location.hash||'').slice(1);
+  if(h&&show(h,false)){var p=document.getElementById(h); if(p)setTimeout(function(){p.scrollIntoView({block:'start'});},0);}
+})();
+</script>
+</body></html>
