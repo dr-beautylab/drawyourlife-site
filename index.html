@@ -9,6 +9,11 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://drawyourlife.co.kr/">
+<link rel="alternate" hreflang="ko" href="https://drawyourlife.co.kr/">
+<link rel="alternate" hreflang="en" href="https://drawyourlife.co.kr/en/">
+<link rel="alternate" hreflang="ja" href="https://drawyourlife.co.kr/ja/">
+<link rel="alternate" hreflang="zh-Hant" href="https://drawyourlife.co.kr/zh/">
+<link rel="alternate" hreflang="x-default" href="https://drawyourlife.co.kr/">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta property="og:url" content="https://drawyourlife.co.kr/">
 <meta property="og:site_name" content="당신을 그리다">
@@ -160,6 +165,9 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
 .fq-a b{color:var(--ink);font-weight:700}
 </style>
 <style>
+.lang-sw{margin-left:auto;display:flex;gap:2px;font-size:11px;white-space:nowrap}
+.lang-sw a{color:var(--ink-soft);text-decoration:none;padding:3px 5px;border-radius:6px}
+.lang-sw a[aria-current="true"]{color:var(--acc);font-weight:800}
 /* ---- 상단 서비스 탭 ---- */
 .tb-bar{position:sticky;top:0;z-index:20;background:rgba(250,243,244,.96);
         backdrop-filter:saturate(1.2) blur(6px);-webkit-backdrop-filter:saturate(1.2) blur(6px);
@@ -178,6 +186,7 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
       <div style="padding:44px 24px 34px;">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:22px;">
           <span style="font-size:11px;font-weight:800;border:1px solid var(--acc);color:var(--acc);padding:3px 9px;border-radius:100px;">PREMIUM IMAGE CONSULTING</span>
+          <nav class="lang-sw" aria-label="Language"><a href="/" hreflang="ko" lang="ko" aria-current="true">KR</a><a href="/en/" hreflang="en" lang="en">EN</a><a href="/ja/" hreflang="ja" lang="ja">日本語</a><a href="/zh/" hreflang="zh-Hant" lang="zh-Hant">中文</a></nav>
         </div>
         <div style="font-size:12px;letter-spacing:0.08em;color:var(--acc);text-transform:uppercase;margin-bottom:10px;">미용학 박사·뷰티전공 대학교수 직접 진단</div>
         <h1 style="font-family:var(--f-display);font-size:26px;line-height:1.5;margin:0 0 14px;white-space:pre-line;">나만의 아름다움을 완성하는 토탈 퍼스널 이미지, <span style="color:var(--acc)">당신을 그리다</span></h1>
