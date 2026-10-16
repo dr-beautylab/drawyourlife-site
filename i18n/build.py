@@ -6,9 +6,11 @@
 import json, os, re, sys
 sys.path.insert(0, os.path.dirname(__file__))
 from strings import S, LANG
+from intl import INTRO, FAQ_TITLE, FAQ
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = 'https://drawyourlife.co.kr'
+GMAPS = 'https://maps.app.goo.gl/EJWTYMtYBL8mupuXA'  # 구글 지도: 당신을 그리다 (Draw Your Life) 마곡본점
 SRC = open(os.path.join(ROOT, 'index.html'), encoding='utf-8').read()
 HANGUL = re.compile(r'[가-힣]')
 # 번역 페이지에도 한글로 남겨두는 것: 매장 이름(지도 검색용)과 주소
@@ -81,11 +83,23 @@ def build(lang):
     url = BASE + cfg['path']
     h = SRC
 
+    # ---- 해외 버전에서 빼는 것: 메이크업 컨설팅(탭·패널·옵션·관련 후기·가격 데이터) ----
+    # 해외 버전은 퍼스널컬러(이미지 컨설팅)만: 탭 바, 웨딩·메이크업 패널 제거
+    h, n1 = re.subn(r'\s*<nav class="tb-bar".*?</nav>', '', h, flags=re.S)
+    h, n2 = re.subn(r'\s*<section class="tb-panel" id="(?:makeup|wedding)".*?</section>', '', h, flags=re.S)
+    n2 = 1 if n2 == 2 else 0
+    h, n3 = re.subn(r'\s*<div class="pz-opt-row">\s*<div>뷰티전공 대학교수 대표원장 직강.*?290,000원</span>\s*</div>\s*</div>', '', h, flags=re.S)
+    if (n1, n2, n3) != (1, 1, 1):
+        raise SystemExit(f'메이크업 영역 제거 실패: {(n1, n2, n3)}')
+    for mark in ['이번에는 동생이랑 같이 메이크업 클래스', '언니와 함께 와서 메이크업 방법 수업']:
+        h, n = re.subn(r'\s*<div class="rv-card">(?:(?!<div class="rv-card">).)*?' + re.escape(mark) + r'.*?<div class="rv-src">.*?</div>\s*</div>', '', h, flags=re.S)
+        if n != 1:
+            raise SystemExit('후기 제거 실패: ' + mark)
+
     # ---- 링크 정리 ----
     h = must_replace(h, '<a href="/blog/" style="display:block;text-align:center;padding:18px;font-size:12px;color:#847C71;text-decoration:underline;">📝 블로그에서 더 알아보기</a>', '', 1)
     h = re.sub(r' <a href="/wedding/" style="color:inherit;white-space:nowrap">자세히 보기 →</a>', '', h)
     h = re.sub(r' <a href="/wedding/" style="color:var\(--acc\)">웨딩 컨설팅 자세히 보기</a>', '', h)
-    h = must_replace(h, '<a href="/wedding/" style="display:block;', f'<a href="{cfg["contact_url"]}" target="_blank" rel="noopener" style="display:block;', 1)
     if '/wedding/' in re.sub(r'<script.*?</script>', '', h, flags=re.S):
         raise SystemExit('남은 /wedding/ 링크가 있음')
     h = must_replace(h, 'href="https://naver.me/5KbMRm0w" style=', f'href="{cfg["contact_url"]}" target="_blank" rel="noopener" style=')
@@ -108,7 +122,7 @@ def build(lang):
     h = re.sub(r'(content|aria-label)="([^"]*[가-힣][^"]*)"', attr, h)
 
     # 탭 이름이 길어지는 언어는 두 줄까지 허용
-    extra = '.tb-btn{white-space:normal;line-height:1.3;font-size:12.5px;padding:8px 4px}\n'
+    extra = '.tb-btn{white-space:normal;line-height:1.3;font-size:12.5px;padding:8px 4px}\n.tb-list{grid-template-columns:repeat(2,1fr)}\n'
     if cfg['font_sans']:
         fam = cfg['font_sans'].replace(' ', '+'); sfam = cfg['font_serif'].replace(' ', '+')
         h = must_replace(h, '<link rel="preconnect" href="https://fonts.googleapis.com">',
@@ -130,8 +144,32 @@ def build(lang):
     if not booking_btn:
         raise SystemExit('예약 버튼을 못 찾음')
     note = f'<p style="font-size:12px;line-height:1.7;color:rgba(255,255,255,0.9);margin:10px 0 0;text-align:center;">{cfg["contact_note"]}</p>'
+    gmap = {'en': 'Open in Google Maps', 'ja': 'Googleマップで見る', 'zh': '在 Google 地圖查看'}[lang]
+    note += (f'<a href="{GMAPS}" target="_blank" rel="noopener" style="display:block;text-align:center;margin-top:12px;'
+             f'border:1px solid rgba(255,255,255,0.6);color:#fff;font-weight:700;padding:12px;border-radius:100px;font-size:13.5px;">📍 {gmap}</a>')
     addr = f'<p style="font-size:11.5px;line-height:1.7;color:rgba(255,255,255,0.75);margin:12px 0 0;">{cfg["address_line"]}</p>\n        '
     h = h.replace(booking_btn.group(1), addr + booking_btn.group(1) + note, 1)
+
+    # ---- 해외 손님용: 첫 화면 소개 박스 + 해외 손님 FAQ ----
+    stats = '<div style="display:flex;align-items:center;gap:0;margin:4px 0 20px;'
+    intro = ('<div style="margin:0 0 18px;padding:14px 16px;background:#fff;border:1px solid var(--line);'
+             'border-left:3px solid var(--acc);border-radius:10px;font-size:13px;line-height:1.7;color:var(--ink);">'
+             + INTRO[lang] + '</div>\n        ')
+    h = must_replace(h, stats, intro + stats, 1)
+    items = ''.join(f'<details class="fq-item"><summary>{q}</summary><div class="fq-a"><div>{a}</div></div></details>' for q, a in FAQ[lang])
+    block = (f'''      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+        <span style="font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;">INTERNATIONAL</span>
+        <div style="flex:1;height:1px;background:var(--line);"></div>
+      </div>
+      <div style="padding:26px 24px 34px;">
+        <h2 style="font-size:17px;font-weight:800;margin:0 0 14px;">{FAQ_TITLE[lang]}</h2>
+<div class="fq-wrap">{items}</div>
+      </div>
+''')
+    bi = h.index('letter-spacing:0.08em;">BOOKING</span>')
+    di = h.rindex('      <div style="display:flex;align-items:center;gap:10px;padding:6px 24px;">', 0, bi)
+    h = h[:di] + block + h[di:]
 
     # ---- 구조화 데이터 ----
     def fix_ld(m):
@@ -153,6 +191,7 @@ def build(lang):
         data['paymentAccepted'] = {'en': 'Cash, Credit Card, Bank Transfer', 'ja': '現金、クレジットカード、銀行振込', 'zh': '現金、信用卡、銀行轉帳'}[lang]
         cat = data['hasOfferCatalog']
         cat['name'] = {'en': 'Personal color & image consulting prices', 'ja': 'パーソナルカラー・イメージコンサル料金', 'zh': '個人色彩・形象諮詢價格'}[lang]
+        cat['itemListElement'] = [o for o in cat['itemListElement'] if '메이크업 클래스' not in o['name'] and '웨딩' not in o['name']]
         for o in cat['itemListElement']:
             o['name'] = offer_name(o['name'], lang)
         if lang == 'en':
