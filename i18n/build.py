@@ -10,7 +10,7 @@ from intl import INTRO, FAQ_TITLE, FAQ
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = 'https://drawyourlife.co.kr'
-GMAPS = 'https://maps.app.goo.gl/EJWTYMtYBL8mupuXA'  # 구글 지도: 당신을 그리다 (Draw Your Life) 마곡본점
+GMAPS = 'https://maps.app.goo.gl/4rzzxFzNqAnP8eui9'  # 구글 지도: 당신을 그리다 (Draw Your Life) 마곡본점
 SRC = open(os.path.join(ROOT, 'index.html'), encoding='utf-8').read()
 HANGUL = re.compile(r'[가-힣]')
 # 번역 페이지에도 한글로 남겨두는 것: 매장 이름(지도 검색용)과 주소
