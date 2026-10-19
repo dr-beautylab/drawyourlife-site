@@ -330,11 +330,6 @@ t('으로 방문해 주셔야 합니다. 피부톤을 커버하는 톤업 선크
   '. Please also skip tone-up sunscreen, which masks your natural skin tone. If you remove makeup at the studio, that time counts toward your session, so coming bare-faced lets you use the full time for your analysis.',
   'でお越しください。肌トーンをカバーするトーンアップ日焼け止めも塗らないでください。店内でメイクを落とす場合はその時間もコンサル時間に含まれるため、事前に落としてお越しいただくと、時間をすべて診断に使えます。',
   '前來。也請不要擦會修飾膚色的提亮防曬。若在店內卸妝，卸妝時間會算在諮詢時間內，事先卸好再來就能把時間完整用在診斷上。')
-t('퍼스널컬러 진단, 누구에게 받는 게 좋을까요?', 'Who will do my analysis?', '診断は誰が担当しますか？', '由誰來為我診斷？')
-t('미용예술학 박사이자 뷰티전공 대학교수이며, 메이크업 박사·헤어 석사 학위를 함께 보유하고 있습니다. 퍼스널컬러·화장품 관련 학술 논문을 다수 집필했고 KCI 등재 논문도 포함되어 있습니다. 2016년부터 진단을 시작해 누적 2만 건이 넘습니다.',
-  'Your analysis is done by our director, a university professor of beauty who holds a PhD in beauty arts (makeup) and an MA in hair. She has written many academic papers on personal color and cosmetics, including KCI-indexed papers, and has done more than 20,000 analyses since 2016.',
-  '美容芸術学博士で美容専攻の大学教授である代表院長が担当します。メイク博士・ヘア修士の学位を持ち、パーソナルカラー・化粧品に関する学術論文を多数執筆しています（KCI掲載含む）。2016年から診断を始め、累計2万件を超えます。',
-  '由美容藝術學博士、美容系大學教授代表院長親自診斷。擁有彩妝博士・美髮碩士學位，撰寫多篇個人色彩・化妝品學術論文（含KCI收錄），自2016年起累計診斷超過2萬件。')
 t('강서구 마곡 어디에 있나요? 예약은 어떻게 하나요?', 'Where are you and how do I book?', '場所と予約方法は？', '地點在哪裡？如何預約？')
 t('서울 강서구 마곡중앙6로 21, 711호입니다. 네이버 예약으로 접수하며 평일 11:00~19:00, 주말·공휴일 11:00~17:00 운영합니다. 대표원장 대학 강의 일정에 따라 변동될 수 있습니다.',
   '@@LOCATION@@', '@@LOCATION@@', '@@LOCATION@@')
@@ -394,3 +389,7 @@ LANG = {
 # ---------- 현지어 검수 반영(원문 위치를 특정할 수 없던 항목) ----------
 S['DRAW · YOUR · LIFE는 어떻게 다른가요?']['en'] = "What's the difference between DRAW, YOUR and LIFE?"
 S['20,000건+']['ja'] = '20,000件以上'
+
+# ---------- 2026-10-20 FAQ 교체 ----------
+t('퍼스널컬러 진단, 어떤 곳에서 받아야 할까요?', 'Where should I get my personal color analysis?', 'パーソナルカラー診断は、どんなところで受けるべき？', '個人色彩診斷，該選擇什麼樣的地方？')
+t('퍼스널컬러는 천을 대보며 눈으로 비교하는 진단이라 진단자의 경험과 조명 환경에 따라 결과가 달라집니다. 진단 경력, 일정한 조명, 세분화된 기준(12계절 등), 결과지 제공 여부를 확인해보세요. 당신을 그리다는 2016년부터 2만 건 이상 진단한 미용예술학 박사 대표원장이 6500K 정밀 조명 아래 12계절 드레이핑으로 직접 진단합니다.', 'Personal color analysis means comparing fabric drapes against your face by eye, so results depend on the analyst’s experience and the lighting. Check the analyst’s track record, consistent lighting, a detailed system (such as 12 seasons), and whether you get a results sheet. At Draw Your Life (당신을 그리다), our director — a PhD in beauty arts who has done more than 20,000 analyses since 2016 — analyzes you personally with 12-season draping under precision 6500K lighting.', 'パーソナルカラーは布を顔に当てて目で比べる診断なので、診断する人の経験や照明環境によって結果が変わります。診断歴、一定の照明、細かな分類（12シーズンなど）、診断結果シートがもらえるかを確認してみてください。Draw Your Life（당신을 그리다）では、2016年から2万件以上を診断してきた美容芸術学博士の代表院長が、6500Kの精密照明のもと12シーズンのドレープで直接診断します。', '個人色彩是把色布放在臉旁用肉眼比較的診斷，因此結果會因診斷者的經驗與照明環境而不同。建議確認診斷資歷、穩定的照明、細分的標準（如12季型），以及是否提供診斷結果單。在 Draw Your Life（당신을 그리다），由2016年起累計診斷超過2萬件的美容藝術學博士代表院長，在6500K精密照明下以12季型色布親自為你診斷。')
