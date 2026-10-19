@@ -343,10 +343,6 @@ t('* 대표원장 대학 강의 일정에 따라 변동될 수 있습니다',
   "* Hours may change depending on the director's university teaching schedule",
   '* 代表院長の大学の講義スケジュールにより変更になる場合があります',
   '* 可能依代表院長的大學授課行程調整')
-t('당신을 그리다는 미용예술학 학사·석사·박사 학위를 모두 보유한 뷰티전공 현직 대학교수, 2016년~ 퍼스널컬러 연구 및 KCI 등재 논문 저자인 대표원장 박현정이 직접 진단합니다.',
-  'At Draw Your Life (당신을 그리다), every diagnosis is done personally by Director Park Hyun-jeong — a university professor of beauty with bachelor’s, master’s and doctoral degrees in beauty arts, researching personal color since 2016 and author of KCI-indexed papers.',
-  'Draw Your Life（당신을 그리다）では、美容芸術学の学士・修士・博士を持つ現役の美容専攻大学教授で、2016年からパーソナルカラーを研究しKCI掲載論文を執筆している代表院長パク・ヒョンジョンが直接診断します。',
-  '在 Draw Your Life（당신을 그리다），由擁有美容藝術學學士・碩士・博士學位的美容系現任大學教授、2016年起研究個人色彩並撰寫KCI收錄論文的代表院長 Park Hyun-jeong 親自診斷。')
 t("당신을 그리다의 세컨드 브랜드, 눈썹 아트메이크업 전문 '닥터뷰티랩'이 궁금하다면 →",
   'Curious about Dr. Beauty Lab, our sister brand specializing in semi-permanent brows? →',
   '姉妹ブランド・眉アートメイク専門「Dr. Beauty Lab」が気になる方はこちら →',
@@ -393,3 +389,7 @@ S['20,000건+']['ja'] = '20,000件以上'
 # ---------- 2026-10-20 FAQ 교체 ----------
 t('퍼스널컬러 진단, 어떤 곳에서 받아야 할까요?', 'Where should I get my personal color analysis?', 'パーソナルカラー診断は、どんなところで受けるべき？', '個人色彩診斷，該選擇什麼樣的地方？')
 t('퍼스널컬러는 천을 대보며 눈으로 비교하는 진단이라 진단자의 경험과 조명 환경에 따라 결과가 달라집니다. 진단 경력, 일정한 조명, 세분화된 기준(12계절 등), 결과지 제공 여부를 확인해보세요. 당신을 그리다는 2016년부터 2만 건 이상 진단한 미용예술학 박사 대표원장이 6500K 정밀 조명 아래 12계절 드레이핑으로 직접 진단합니다.', 'Personal color analysis means comparing fabric drapes against your face by eye, so results depend on the analyst’s experience and the lighting. Check the analyst’s track record, consistent lighting, a detailed system (such as 12 seasons), and whether you get a results sheet. At Draw Your Life (당신을 그리다), our director — a PhD in beauty arts who has done more than 20,000 analyses since 2016 — analyzes you personally with 12-season draping under precision 6500K lighting.', 'パーソナルカラーは布を顔に当てて目で比べる診断なので、診断する人の経験や照明環境によって結果が変わります。診断歴、一定の照明、細かな分類（12シーズンなど）、診断結果シートがもらえるかを確認してみてください。Draw Your Life（당신을 그리다）では、2016年から2万件以上を診断してきた美容芸術学博士の代表院長が、6500Kの精密照明のもと12シーズンのドレープで直接診断します。', '個人色彩是把色布放在臉旁用肉眼比較的診斷，因此結果會因診斷者的經驗與照明環境而不同。建議確認診斷資歷、穩定的照明、細分的標準（如12季型），以及是否提供診斷結果單。在 Draw Your Life（당신을 그리다），由2016年起累計診斷超過2萬件的美容藝術學博士代表院長，在6500K精密照明下以12季型色布親自為你診斷。')
+t('당신을 그리다는 미용예술학 학사·석사·박사 학위를 모두 보유한 뷰티전공 대학교수, 퍼스널컬러 연구 및 KCI 등재 논문 저자인 대표원장이 직접 진단합니다.',
+  'At Draw Your Life (당신을 그리다), every analysis is done personally by our director — a university beauty professor with bachelor’s, master’s and doctoral degrees in beauty arts, a personal color researcher and an author of KCI-indexed papers.',
+  'Draw Your Life（당신을 그리다）では、美容芸術学の学士・修士・博士の学位を持つ美容専攻の大学教授であり、パーソナルカラーの研究者・KCI掲載論文の著者でもある代表院長が直接診断します。',
+  '在 Draw Your Life（당신을 그리다），由擁有美容藝術學學士・碩士・博士學位的美容系大學教授、同時也是個人色彩研究者暨KCI收錄論文作者的代表院長親自為你診斷。')
