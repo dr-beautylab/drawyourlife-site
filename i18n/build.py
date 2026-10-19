@@ -97,7 +97,7 @@ def build(lang):
             raise SystemExit('후기 제거 실패: ' + mark)
 
     # ---- 링크 정리 ----
-    h = must_replace(h, '<a href="/blog/" style="display:block;text-align:center;padding:18px;font-size:12px;color:#847C71;text-decoration:underline;">📝 블로그에서 더 알아보기</a>', '', 1)
+    h = h.replace('<a href="/blog/" style="display:block;text-align:center;padding:18px;font-size:12px;color:#847C71;text-decoration:underline;">📝 블로그에서 더 알아보기</a>', '')  # 블로그는 AI·검색용이라 화면에 링크하지 않음
     h = re.sub(r' <a href="/wedding/" style="color:inherit;white-space:nowrap">자세히 보기 →</a>', '', h)
     h = re.sub(r' <a href="/wedding/" style="color:var\(--acc\)">웨딩 컨설팅 자세히 보기</a>', '', h)
     if '/wedding/' in re.sub(r'<script.*?</script>', '', h, flags=re.S):
