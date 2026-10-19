@@ -98,6 +98,7 @@ def build(lang):
 
     # ---- 링크 정리 ----
     h = h.replace('<a href="/blog/" style="display:block;text-align:center;padding:18px;font-size:12px;color:#847C71;text-decoration:underline;">📝 블로그에서 더 알아보기</a>', '')  # 블로그는 AI·검색용이라 화면에 링크하지 않음
+    h = h.replace('<a href="/blog/" style="display:block;text-align:center;padding:14px 0 18px;font-size:10.5px;color:#B7ADA6;text-decoration:none;">퍼스널컬러 칼럼</a>', '')  # 한국어 블로그 작은 링크는 해외 버전에서 제외
     h = re.sub(r' <a href="/wedding/" style="color:inherit;white-space:nowrap">자세히 보기 →</a>', '', h)
     h = re.sub(r' <a href="/wedding/" style="color:var\(--acc\)">웨딩 컨설팅 자세히 보기</a>', '', h)
     if '/wedding/' in re.sub(r'<script.*?</script>', '', h, flags=re.S):
