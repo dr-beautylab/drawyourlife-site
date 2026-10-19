@@ -228,12 +228,10 @@ t('같은 시간에 함께 진행되며 인원이 늘수록 1인당 금액이 �
   '同じ時間に一緒に進行し、人数が増えるほど1名あたりの料金が下がります。DRAW・YOUR・LIFEいずれも最大3名まで予約でき、4名以上は別途お問い合わせください。',
   '同一時段一起進行，人數越多每人越便宜。DRAW・YOUR・LIFE 皆最多可預約3人，4人以上請另行洽詢。')
 t('진단 결과는 어떤 형태로 받나요?', 'What do I take home?', '診断結果はどのような形で受け取れますか？', '診斷結果會以什麼形式提供？')
-t('자체 제작 진단 결과지와 쇼핑할 때 들고 다닐 수 있는 컬러 카드를 드립니다. YOUR는 톤별 맞춤 가이드가, LIFE는 이미지메이킹 토탈 가이드가 추가됩니다.',
-  'You receive our own results sheet and a color card to carry while shopping. YOUR adds a custom guide for your color type, and LIFE adds a complete personal image guide.',
-  'オリジナルの診断結果シートと、買い物に持ち歩けるカラーカードをお渡しします。YOURはトーン別ガイド、LIFEはイメージメイキング・トータルガイドが追加されます。',
-  '提供自製診斷結果單，以及購物時可隨身攜帶的色卡。YOUR 另附色調專屬指南，LIFE 另附形象打造全方位指南。')
-
-# ---------- 웨딩 ----------
+t('자체 제작한 진단 결과지와, 쇼핑할 때 들고 다니며 참고할 수 있는 컬러 카드를 드립니다. YOUR 컨설팅은 톤별 맞춤 가이드(PDF)를 추가로 보내드리고, LIFE 컨설팅은 이미지메이킹 토탈 가이드(PDF)까지 보내드립니다.',
+  'You receive our own results sheet and a color card to carry and refer to while shopping. With YOUR, we also send you a custom guide for your color type (PDF), and with LIFE, a complete personal image guide (PDF) as well.',
+  'オリジナルの診断結果シートと、お買い物の際に持ち歩いて参考にできるカラーカードをお渡しします。YOURコンサルではトーン別ガイド（PDF）を追加でお送りし、LIFEコンサルではイメージメイキング・トータルガイド（PDF）までお送りします。',
+  '提供自製的診斷結果單，以及購物時可隨身攜帶參考的色卡。YOUR 諮詢另外寄送色調專屬指南（PDF），LIFE 諮詢則再加送形象打造全方位指南（PDF）。')
 t('결혼 준비 중이라면,', 'Getting married?', '結婚準備中なら、', '正在準備婚禮的話，')
 t('드레스 투어 전에 내 컬러부터', 'Find your colors before you go dress shopping', 'ドレス選びの前に、まず自分のカラーを', '挑婚紗之前，先找到自己的顏色')
 t('퍼스널컬러 진단 + 웨딩 컨설팅을 한 번에. 2부 드레스, 신랑 예복, 티아라·부케·쥬얼리, 스드메 견적 비교 노하우까지 유부선배가 함께 준비해드려요.',
