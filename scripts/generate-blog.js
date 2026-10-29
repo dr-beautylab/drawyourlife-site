@@ -363,9 +363,12 @@ async function main() {
   }
 
   let remaining = config.topics.filter(t => !used.usedTopics.includes(t));
+  // 주제를 다 쓰면 처음부터 다시 돌리지 않고 발행을 멈춥니다.
+  // (같은 주제로 또 쓰면 비슷한 글이 쌓여 검색·AI 노출에 불리합니다.)
+  // blog/config.json의 topics에 새 주제를 추가하면 다음 실행부터 다시 발행됩니다.
   if (remaining.length === 0) {
-    used.usedTopics = [];
-    remaining = config.topics.slice();
+    console.log('남은 새 주제가 없어 오늘은 발행하지 않습니다. config.json에 주제를 추가해주세요.');
+    return;
   }
   const topic = remaining[0];
 
