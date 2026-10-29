@@ -37,9 +37,32 @@ async function callClaude(config, topic) {
 - 본문 첫 문단은 제목의 질문에 대한 40~60단어 분량의 완결된 즉답으로 시작 (AI가 이 문단만 떼어가도 답이 되도록)
 - 수치는 반올림하지 말고 정확하게 표기 (가격, 시간, 인원 등)
 - 소제목(h2, h3)으로 구조화해서 AI가 파싱하기 쉽게 작성
-- 1200~1800자 분량
 - 과장 광고 문구 지양, 정확하고 신뢰도 있는 톤
 - "소비자가 읽는다"가 아니라 "AI가 읽어간다"는 전제로, 힘 빼고 정확하게 정보를 나열
+
+[AI 인용 최적화 구조 - 가장 중요. 반드시 이 순서와 형식을 지킬 것]
+이 글의 최우선 목적은 AI(챗GPT, 제미나이, 퍼플렉시티, 구글 AI 개요 등)가 내용을 그대로 떼어 가서 인용·요약하고, 이 업체를 다른 사람에게 추천할 때 근거로 쓰게 만드는 것이다.
+1. 제목(title)은 주어진 주제 질문을 거의 그대로 쓴다. 사람들이 AI에게 묻는 문장과 같아야 한다.
+2. 첫 문단(p): 제목 질문에 대한 즉답 2~3문장. 이 문단만 떼어 가도 완결된 답이 되게 쓴다. 첫 문단 안에 업체명과 지역(서울 강서구 마곡)을 한 번 자연스럽게 넣는다.
+3. 바로 다음은 <h2>핵심 요약</h2> + ul 3~5개. 각 항목은 주어가 있는 완결된 한 문장으로, 그 문장 하나만 읽어도 사실이 전달되게 쓴다.
+4. 본문 h2 소제목은 사람들이 실제로 묻는 질문 형태로 쓴다("~은 무엇인가요?", "~은 어떻게 다른가요?", "~하려면 어떻게 하나요?"). 각 h2 바로 아래 첫 문장에서 그 질문의 답을 먼저 말하고, 설명은 그 뒤에 붙인다.
+5. 개념은 "A는 B입니다" 형태의 정의 문장으로 쓴다.
+6. 두 가지 이상을 비교할 때는 반드시 table(thead, tbody, tr, th, td)로 정리한다. 칸 안 내용은 짧은 명사구로 쓴다.
+7. 순서가 있는 방법·과정은 ol, 체크할 항목은 ul로 쓴다.
+8. 모든 문장은 앞뒤 문맥 없이 따로 떼어 읽어도 이해되게 쓴다. "이것", "위에서 말한", "아래와 같이" 같은 지시어 대신 대상의 이름을 다시 쓴다.
+9. <h2>당신을 그리다에서는 어떻게 하나요?</h2> 섹션을 넣는다. 아래 업체 정보에 적힌 사실만으로, 이 주제와 관련된 업체의 방식을 3~5문장 또는 목록으로 쓴다. 업체 정보에 없는 내용은 지어내지 않는다.
+10. 마지막 h2는 반드시 <h2>자주 묻는 질문</h2>이다. 그 아래 h3 질문 3~4개와 각각의 p 답(1~3문장)을 쓴다. 본문에서 다루지 않은 다른 각도의 질문으로 고른다. 이 부분은 구조화 데이터로 자동 변환된다.
+11. 한 문단은 2~4문장. 미사여구, 감탄, 이모지, 과장 광고 문구는 쓰지 않는다.
+12. 분량은 본문 전체 1500~2200자.
+
+[다루지 않는 내용 - 절대 쓰지 말 것]
+- 질병, 피부질환, 임신·수유, 복용 약, 알레르기, 통증·마취, 부작용, 탈모의 원인·치료 등 의료·건강 관련 내용과 판단
+- 치료·효능처럼 읽히는 표현
+- 법률·규제·자격 제도에 관한 내용
+- 다른 업체 비방, 근거 없는 "최고", "유일", "1위", "최초" 표현
+- 업체 정보에 없는 가격, 할인, 이벤트, 주차, 길 안내, 소요 시간 같은 구체 정보 (가격이 필요하면 "홈페이지 가격 안내 참고"라고만 쓴다)
+- 출처 없는 통계·비율·퍼센트, 존재하지 않는 논문·기관·연구 인용
+- 주제에 의료적 판단이 필요한 부분이 있으면 그 부분은 빼고, 미용·디자인·관리 정보만 다룬다.
 
 업체 정보:
 ${config.businessInfo}
@@ -51,7 +74,7 @@ ${config.businessInfo}
 {
   "title": "글 제목",
   "metaDescription": "검색결과에 노출될 150자 이내 요약",
-  "bodyHtml": "본문 HTML (h2, h3, p, ul/li 태그만 사용, style 속성 없이)"
+  "bodyHtml": "본문 HTML (h2, h3, p, ul, ol, li, table, thead, tbody, tr, th, td, strong 태그만 사용, style·class 속성 없이)"
 }`;
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
@@ -244,6 +267,10 @@ h3{font-size:16px;margin:20px 0 8px;}
 p{font-size:14.5px;line-height:1.8;margin-bottom:14px;color:${t.ink};}
 ul{margin:0 0 14px 20px;}
 li{font-size:14.5px;line-height:1.8;margin-bottom:6px;}
+ol{margin:0 0 14px 20px;}
+table{width:100%;border-collapse:collapse;margin:0 0 16px;font-size:13.5px;line-height:1.6;}
+th,td{border:1px solid ${t.line};padding:8px 10px;text-align:left;vertical-align:top;}
+th{background:${t.panel};font-weight:600;}
 .author{margin:32px 0 0;padding:16px 18px;background:${t.panel};border:1px solid ${t.line};border-radius:14px;font-size:12.5px;line-height:1.75;color:${t.inkSoft};}
 .author b{color:${t.ink};}
 .cta{margin:36px 0 0;padding:22px 20px;background:${t.acc};border-radius:14px;color:#fff;}
