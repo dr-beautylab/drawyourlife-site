@@ -48,3 +48,13 @@ jobs:
             git pull --rebase origin main
           done
           git push
+
+      - name: 빙에 새 글 알리기 (IndexNow)
+        if: success()
+        continue-on-error: true
+        run: |
+          git fetch -q origin main && git reset -q --hard origin/main
+          CHANGED=$(git log --since="30 minutes ago" --author="auto-blog-bot" --name-only --pretty=format: | sort -u)
+          [ -z "$CHANGED" ] && echo "새 글 없음" && exit 0
+          sleep 150
+          echo "$CHANGED" | xargs -r -d '\n' python3 scripts/indexnow.py

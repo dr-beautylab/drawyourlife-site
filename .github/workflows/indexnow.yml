@@ -1,0 +1,40 @@
+name: IndexNow (빙에 새 페이지 알리기)
+
+# 직접 올린 수정(사람·Claude 커밋)이 main에 들어오면 바뀐 페이지만 빙에 알립니다.
+# 자동 블로그 발행분은 auto-blog.yml 마지막 단계에서 따로 알립니다.
+on:
+  push:
+    branches: [main]
+    paths: ['**.html']
+  workflow_dispatch:
+    inputs:
+      all:
+        description: '사이트맵 전체를 한 번에 알리기'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: 배포 완료 대기 (클라우드플레어 반영 시간)
+        run: sleep 150
+      - name: 빙에 알리기
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+          ALL: ${{ inputs.all }}
+        run: |
+          if [ "$ALL" = "true" ]; then
+            python3 scripts/indexnow.py --all
+          elif [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            git diff --name-only HEAD~1 HEAD | xargs -r -d '\n' python3 scripts/indexnow.py
+          else
+            git diff --name-only "$BEFORE" "$AFTER" | xargs -r -d '\n' python3 scripts/indexnow.py
+          fi
