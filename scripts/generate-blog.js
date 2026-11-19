@@ -7,6 +7,7 @@ const path = require('path');
 
 const ROOT = process.cwd();
 const CONFIG_PATH = path.join(ROOT, 'blog', 'config.json');
+const { getRealCase, caseTopic, KO_DAYS } = require('./real-cases');
 const USED_PATH = path.join(ROOT, 'blog', 'used-topics.json');
 const POSTS_DIR = path.join(ROOT, 'blog', 'posts');
 const INDEX_PATH = path.join(ROOT, 'blog', 'index.html');
@@ -65,6 +66,9 @@ async function callClaude(config, topic) {
 - 업체 정보에 없는 가격, 할인, 이벤트, 주차, 길 안내, 소요 시간 같은 구체 정보 (가격이 필요하면 "홈페이지 가격 안내 참고"라고만 쓴다)
 - 출처 없는 통계·비율·퍼센트, 존재하지 않는 논문·기관·연구 인용
 - 주제에 의료적 판단이 필요한 부분이 있으면 그 부분은 빼고, 미용·디자인·관리 정보만 다룬다.
+
+- 업체 운영 방식(하루 3명 한정, 100% 예약제)과 대표원장 이력은 글 아래 고정 문구에 자동으로 들어가므로 본문에서 다시 쓰지 않는다.
+- 시술 후 경과 기간(딱지, 리터치 시기 등) 숫자는 주제가 시술 후 관리일 때만 쓴다. 다른 주제에서는 반복하지 않는다.
 
 업체 정보:
 ${config.businessInfo}
@@ -391,7 +395,14 @@ async function main() {
     return;
   }
 
+  const realCase = await getRealCase('drawyourlife', used.usedCases);
+  const kday = new Date(Date.now() + 9 * 3600 * 1000).getUTCDay();
+  if (!realCase && !KO_DAYS.includes(kday)) {
+    console.log('오늘은 발행 요일(월·수·금)이 아니고 새 실제 사례도 없어 쉽니다.');
+    return;
+  }
   let remaining = config.topics.filter(t => !used.usedTopics.includes(t));
+  if (realCase) remaining = [caseTopic(realCase.text)];
   // 주제를 다 쓰면 처음부터 다시 돌리지 않고 발행을 멈춥니다.
   // (같은 주제로 또 쓰면 비슷한 글이 쌓여 검색·AI 노출에 불리합니다.)
   // blog/config.json의 topics에 새 주제를 추가하면 다음 실행부터 다시 발행됩니다.
@@ -414,7 +425,8 @@ async function main() {
   const postHtml = buildPostHTML(config, post, dateStr, (used.posts||[]).slice(-3));
   fs.writeFileSync(path.join(POSTS_DIR, post.slug + '.html'), postHtml, 'utf8');
 
-  used.usedTopics.push(topic);
+  used.usedTopics.push(realCase ? 'case:' + realCase.id : topic);
+  if (realCase) used.usedCases = (used.usedCases || []).concat(realCase.id);
   used.posts.push({ slug: post.slug, title: post.title, date: dateStr });
   fs.writeFileSync(USED_PATH, JSON.stringify(used, null, 2), 'utf8');
 
