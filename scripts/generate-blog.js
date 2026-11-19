@@ -11,7 +11,7 @@ const USED_PATH = path.join(ROOT, 'blog', 'used-topics.json');
 const POSTS_DIR = path.join(ROOT, 'blog', 'posts');
 const INDEX_PATH = path.join(ROOT, 'blog', 'index.html');
 // 구글 애널리틱스 (새 블로그 글에도 자동 포함)
-const GA_TAG = '<script async src="https://www.googletagmanager.com/gtag/js?id=G-DQF4K96CN7"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-DQF4K96CN7",{allow_google_signals:false,allow_ad_personalization_signals:false});</script>';
+const GA_TAG = '<script async src="https://www.googletagmanager.com/gtag/js?id=G-DQF4K96CN7"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-DQF4K96CN7",{allow_google_signals:false,allow_ad_personalization_signals:false});</script><script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","zg3n8utwp4");</script>';
 const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
 const ROBOTS_PATH = path.join(ROOT, 'robots.txt');
 
