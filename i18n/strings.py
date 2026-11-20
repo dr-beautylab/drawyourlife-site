@@ -143,7 +143,7 @@ t('퍼스널컬러 3요소 신체색', '3-point natural coloring check', 'パー
 t('(피부/눈동자/헤어컬러) 체크', '(skin / eyes / hair)', '（肌・瞳・髪色）チェック', '（膚色／瞳色／髮色）檢測')
 t('퍼스널컬러 12계절 드레이핑 진단', '12-season personal color draping', 'パーソナルカラー12シーズン・ドレープ診断', '12季型色布比色診斷')
 t('색조 메이크업 제품 추천', 'Makeup product recommendations', 'カラーメイクアイテムの提案', '彩妝產品推薦')
-t('립 컬러 테스트', 'Lip color test', 'リップカラーテスト', '唇色測試')
+t('패션 컬러 추천', 'Fashion color recommendations', 'ファッションカラーの提案', '穿搭色彩推薦')
 t('자체 제작 진단결과지 +', 'Custom results sheet +', 'オリジナル診断結果シート＋', '自製診斷結果單＋')
 t('쇼핑 참고용 컬러 카드 제공', 'color card for shopping', '買い物用カラーカード', '購物用色卡')
 t('패션스타일링 추천 + 쥬얼리 추천', 'Fashion styling + jewelry', 'ファッション＋ジュエリー提案', '穿搭＋飾品推薦')
@@ -187,9 +187,9 @@ t('가격', 'Price', '料金', '價格')
 t('1인', '1', '1名', '1人')
 t('2인', '2', '2名', '2人')
 t('3인', '3', '3名', '3人')
-t('1인 11만원', '₩110,000 / person', '1名あたり ₩110,000', '每人 ₩110,000')
-t('1인 10.5만원', '₩105,000 / person', '1名あたり ₩105,000', '每人 ₩105,000')
-t('1인 8.5만원', '₩85,000 / person', '1名あたり ₩85,000', '每人 ₩85,000')
+t('1인 12만원', '₩120,000 / person', '1名あたり ₩120,000', '每人 ₩120,000')
+t('1인 11.5만원', '₩115,000 / person', '1名あたり ₩115,000', '每人 ₩115,000')
+t('1인 9.5만원', '₩95,000 / person', '1名あたり ₩95,000', '每人 ₩95,000')
 t('1인 20만원', '₩200,000 / person', '1名あたり ₩200,000', '每人 ₩200,000')
 t('1인 18만원', '₩180,000 / person', '1名あたり ₩180,000', '每人 ₩180,000')
 t('1인 16만원', '₩160,000 / person', '1名あたり ₩160,000', '每人 ₩160,000')
@@ -205,10 +205,10 @@ t('※ 4인 이상 기업·단체 예약 및 미디어 협업은 별도 문의 �
 # ---------- 이미지 컨설팅 FAQ ----------
 t('DRAW · YOUR · LIFE는 어떻게 다른가요?', 'How are DRAW, YOUR and LIFE different?', 'DRAW・YOUR・LIFEの違いは？', 'DRAW・YOUR・LIFE 有什麼不同？')
 t('뒤로 갈수록 앞 과정을 포함하는 구조입니다. ', 'Each course includes everything in the one before it. ', '後のコースほど前のコースの内容を含みます。', '後面的方案包含前面方案的所有內容。')
-t('는 12계절 드레이핑 진단과 색조 제품·립 컬러 추천, 진단결과지와 컬러 카드까지. ',
-  ' covers 12-season draping, makeup product and lip color recommendations, plus your results sheet and color card. ',
-  'は12シーズンのドレープ診断、カラーメイクアイテム・リップカラーの提案、診断結果シートとカラーカードまで。',
-  '包含12季型色布比色診斷、彩妝產品與唇色推薦、診斷結果單與色卡。')
+t('는 12계절 드레이핑 진단과 색조 제품·패션 컬러 추천, 진단결과지와 컬러 카드까지. ',
+  ' covers 12-season draping, makeup product and fashion color recommendations, plus your results sheet and color card. ',
+  'は12シーズンのドレープ診断、カラーメイクアイテム・ファッションカラーの提案、診断結果シートとカラーカードまで。',
+  '包含12季型色布比色診斷、彩妝產品與穿搭色彩推薦、診斷結果單與色卡。')
 t('는 여기에 패션 스타일링·쥬얼리, 헤어·아이브로우·네일 디자인, 렌즈·안경 디자인, 향수 추천과 메이크업 파우치 진단이 더해집니다. ',
   ' adds recommendations for fashion and jewelry, hair, brows, nails, contact lenses, eyeglasses and fragrance, plus a makeup bag check. ',
   'はそこにファッション・ジュエリー、ヘア・眉・ネイルデザイン、カラコン・メガネデザイン、香水の提案とメイクポーチ診断が加わります。',
@@ -218,10 +218,10 @@ t('는 얼굴 골격과 체형 골격 AI 정밀 분석, 메이크업 코칭과 �
   'は顔の骨格と体型骨格のAI精密分析、メイクコーチングとファッションコーチングまで含むトータルコースです。',
   '是全方位方案，再加上臉部與體型骨架AI精密分析、彩妝指導與穿搭指導。')
 t('퍼스널컬러 진단, 시간과 가격은 어떻게 되나요?', 'How long does personal color analysis take, and how much is it?', '診断の所要時間と料金は？', '個人色彩診斷的時間和價格是？')
-t('1인 기준 DRAW 40분 11만원, YOUR 80분 20만원, LIFE 110분 30만원입니다. 인원이 늘수록 1인당 금액이 내려가서 DRAW 3인은 1인 8.5만원입니다. 4인 이상 기업·단체 예약은 별도 문의 주세요. 인원별 표는 위 가격 안내에 정리해두었습니다.',
-  'For one person: DRAW 40 min ₩110,000, YOUR 80 min ₩200,000, LIFE 110 min ₩300,000. The more people, the lower the price per person — DRAW for 3 is ₩85,000 each. For groups of 4 or more, please contact us. See the price table above for details.',
-  '1名の場合、DRAW 40分 ₩110,000、YOUR 80分 ₩200,000、LIFE 110分 ₩300,000です。人数が増えるほど1名あたりの料金が下がり、DRAW 3名なら1名あたり ₩85,000です。4名以上の企業・団体予約は別途お問い合わせください。人数別の料金は上の表をご覧ください。',
-  '1人價格：DRAW 40分鐘 ₩110,000、YOUR 80分鐘 ₩200,000、LIFE 110分鐘 ₩300,000。人數越多每人越便宜，DRAW 3人每人 ₩85,000。4人以上團體預約請另行洽詢。各人數價格請見上方價目表。')
+t('1인 기준 DRAW 50분 12만원, YOUR 80분 20만원, LIFE 110분 30만원입니다. 인원이 늘수록 1인당 금액이 내려가서 DRAW 3인은 1인 9.5만원입니다. 4인 이상 기업·단체 예약은 별도 문의 주세요. 인원별 표는 위 가격 안내에 정리해두었습니다.',
+  'For one person: DRAW 50 min ₩120,000, YOUR 80 min ₩200,000, LIFE 110 min ₩300,000. The more people, the lower the price per person — DRAW for 3 is ₩95,000 each. For groups of 4 or more, please contact us. See the price table above for details.',
+  '1名の場合、DRAW 50分 ₩120,000、YOUR 80分 ₩200,000、LIFE 110分 ₩300,000です。人数が増えるほど1名あたりの料金が下がり、DRAW 3名なら1名あたり ₩95,000です。4名以上の企業・団体予約は別途お問い合わせください。人数別の料金は上の表をご覧ください。',
+  '1人價格：DRAW 50分鐘 ₩120,000、YOUR 80分鐘 ₩200,000、LIFE 110分鐘 ₩300,000。人數越多每人越便宜，DRAW 3人每人 ₩95,000。4人以上團體預約請另行洽詢。各人數價格請見上方價目表。')
 t('2인 이상 함께 예약하면 어떻게 진행되나요?', 'How does it work if we book together?', '2名以上で予約するとどうなりますか？', '2人以上一起預約會怎麼進行？')
 t('같은 시간에 함께 진행되며 인원이 늘수록 1인당 금액이 내려갑니다. DRAW·YOUR·LIFE 모두 최대 3인까지 예약하실 수 있고, 4인 이상 기업·단체 예약은 별도 문의 주세요.',
   'You all go through the session together at the same time, and the per-person price drops as the group grows. DRAW, YOUR and LIFE can each be booked for up to 3 people; for 4 or more, please contact us.',
