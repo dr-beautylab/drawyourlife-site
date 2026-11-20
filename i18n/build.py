@@ -107,6 +107,9 @@ def build(lang):
     h = must_replace(h, 'href="https://naver.me/5KbMRm0w" style=', f'href="{cfg["contact_url"]}" target="_blank" rel="noopener" style=')
 
     # ---- 언어 스위치 현재 언어 표시 ----
+    h, n_ar = re.subn(r'\n  <!-- AI결과지 예시 시작 -->.*?<!-- AI결과지 예시 끝 -->\n', '\n', h, flags=re.S)  # 결과지 이미지가 한국어라 해외 버전에서 제외
+    if n_ar != 1:
+        raise SystemExit('AI 결과지 예시 블록을 못 찾음')
     h = h.replace('lang="ko" aria-current="true"', 'lang="ko"')
     h = must_replace(h, f'href="{cfg["path"]}" hreflang="{cfg["html_lang"]}" lang="{cfg["html_lang"]}"',
                      f'href="{cfg["path"]}" hreflang="{cfg["html_lang"]}" lang="{cfg["html_lang"]}" aria-current="true"', 1)

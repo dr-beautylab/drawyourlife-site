@@ -119,6 +119,15 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
   .pz-won{font-variant-numeric:tabular-nums}
   .pz-note{font-size:12px;color:var(--soft);line-height:1.7;margin-top:-16px;margin-bottom:30px}
   /* 표 아래가 아니라 구성도 바로 밑에 놓이는 주석 */
+  .ar-box{margin-top:6px;padding-top:26px;border-top:1px solid #E5DAD4}
+  .ar-lead{font-size:13px;color:var(--ink-soft);line-height:1.7;margin:-6px 0 16px}
+  .ar-img{display:block;width:100%;height:auto;border-radius:12px;margin:0 0 12px;background:#FBF7F3}
+  .ar-more summary{list-style:none;cursor:pointer;text-align:center;font-size:14px;font-weight:600;color:var(--acc);
+    border:1px solid var(--acc);border-radius:100px;padding:11px 16px;margin:4px auto 14px;max-width:260px}
+  .ar-more summary::-webkit-details-marker{display:none}
+  .ar-more summary::after{content:" ＋"}
+  .ar-more[open] summary::after{content:" －"}
+  .ar-cap{font-size:11px;color:var(--ink-soft);margin:2px 0 0}
   .pz-note-top{margin:-14px 0 30px;padding-top:14px;border-top:1px solid #E5DAD4}
 
   /* ---- 모바일 ---- */
@@ -495,6 +504,20 @@ body{background:#ddd;display:flex;justify-content:center;font-family:'Pretendard
     </tbody>
   </table>
   <p class="pz-note">※ 4인 이상 기업·단체 예약 및 미디어 협업은 별도 문의 바랍니다.</p>
+
+  <!-- AI결과지 예시 시작 -->
+  <div class="ar-box">
+    <h2 class="pz-sec">LIFE에 포함된 AI 분석 결과지</h2>
+    <p class="ar-lead">사전 사진으로 미리 분석하고, 방문 당일 하나씩 설명해 드려요.</p>
+    <img class="ar-img" src="/img/ai-report-cover.webp" width="860" height="1050" loading="lazy" decoding="async" alt="당신을 그리다 AI 분석 결과지 2종 샘플 - 얼굴 결과지와 체형 결과지 표지">
+    <details class="ar-more">
+      <summary>결과지 안쪽 미리보기</summary>
+      <img class="ar-img" src="/img/ai-report-face.webp" width="860" height="1848" loading="lazy" decoding="async" alt="얼굴 결과지 구성 - 진단 결과, 이목구비 비율 분석, 메이크업 솔루션, 눈썹 기준선, 헤어스타일 제안, 안경·귀걸이 스타일링 가이드">
+      <img class="ar-img" src="/img/ai-report-body.webp" width="860" height="2184" loading="lazy" decoding="async" alt="체형 결과지 구성 - 3계열 9타입 골격 진단, 점수 그래프, 상의·하의 기준, 소재·무늬, 아이템별 가이드, 가방·신발">
+    </details>
+    <p class="ar-cap">※ 실제 손님 결과지 샘플이며 이름과 사진은 가렸습니다.</p>
+  </div>
+  <!-- AI결과지 예시 끝 -->
 </div>
 </div>
       </div>
