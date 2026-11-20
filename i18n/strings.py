@@ -144,6 +144,7 @@ t('(피부/눈동자/헤어컬러) 체크', '(skin / eyes / hair)', '（肌・�
 t('퍼스널컬러 12계절 드레이핑 진단', '12-season personal color draping', 'パーソナルカラー12シーズン・ドレープ診断', '12季型色布比色診斷')
 t('색조 메이크업 제품 추천', 'Makeup product recommendations', 'カラーメイクアイテムの提案', '彩妝產品推薦')
 t('패션 컬러 추천', 'Fashion color recommendations', 'ファッションカラーの提案', '穿搭色彩推薦')
+t('립 컬러 테스트', 'Lip color test', 'リップカラーテスト', '唇色測試')
 t('자체 제작 진단결과지 +', 'Custom results sheet +', 'オリジナル診断結果シート＋', '自製診斷結果單＋')
 t('쇼핑 참고용 컬러 카드 제공', 'color card for shopping', '買い物用カラーカード', '購物用色卡')
 t('패션스타일링 추천 + 쥬얼리 추천', 'Fashion styling + jewelry', 'ファッション＋ジュエリー提案', '穿搭＋飾品推薦')
@@ -209,10 +210,10 @@ t('는 12계절 드레이핑 진단과 색조 제품·패션 컬러 추천, 진�
   ' covers 12-season draping, makeup product and fashion color recommendations, plus your results sheet and color card. ',
   'は12シーズンのドレープ診断、カラーメイクアイテム・ファッションカラーの提案、診断結果シートとカラーカードまで。',
   '包含12季型色布比色診斷、彩妝產品與穿搭色彩推薦、診斷結果單與色卡。')
-t('는 여기에 패션 스타일링·쥬얼리, 헤어·아이브로우·네일 디자인, 렌즈·안경 디자인, 향수 추천과 메이크업 파우치 진단이 더해집니다. ',
-  ' adds recommendations for fashion and jewelry, hair, brows, nails, contact lenses, eyeglasses and fragrance, plus a makeup bag check. ',
-  'はそこにファッション・ジュエリー、ヘア・眉・ネイルデザイン、カラコン・メガネデザイン、香水の提案とメイクポーチ診断が加わります。',
-  '再加上穿搭與飾品、髮型・眉型・美甲設計、彩色隱形眼鏡・眼鏡款式、香水推薦與化妝包診斷。')
+t('는 여기에 립 컬러 테스트, 패션 스타일링·쥬얼리, 헤어·아이브로우·네일 디자인, 렌즈·안경 디자인, 향수 추천과 메이크업 파우치 진단이 더해집니다. ',
+  ' adds a lip color test and recommendations for fashion and jewelry, hair, brows, nails, contact lenses, eyeglasses and fragrance, plus a makeup bag check. ',
+  'はそこにリップカラーテスト、ファッション・ジュエリー、ヘア・眉・ネイルデザイン、カラコン・メガネデザイン、香水の提案とメイクポーチ診断が加わります。',
+  '再加上唇色測試、穿搭與飾品、髮型・眉型・美甲設計、彩色隱形眼鏡・眼鏡款式、香水推薦與化妝包診斷。')
 t('는 얼굴 골격과 체형 골격 AI 정밀 분석, 메이크업 코칭과 패션 스타일링 코칭까지 포함한 토탈 과정입니다.',
   ' is the complete course, adding AI analysis of your facial bone structure and body type, plus makeup and fashion styling coaching.',
   'は顔の骨格と体型骨格のAI精密分析、メイクコーチングとファッションコーチングまで含むトータルコースです。',
